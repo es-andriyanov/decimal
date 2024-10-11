@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-class s21_decimal {
+class es_decimal {
   public static int DotPosition(string s) {
     int i = s.IndexOf('.');
     if (i == -1)
@@ -46,10 +46,10 @@ class s21_decimal {
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("  //  {0}{{{{{1}, {2}, {3}, {4}}}}};", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_bits[0], orig_bits[1], orig_bits[2], orig_bits[3]);
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
-        stream.WriteLine("  s21_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
-        stream.WriteLine("  s21_decimal res = {{0, 0, 0, 0}};");
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, two, &res), " + "{0});", exp_res);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
+        stream.WriteLine("  es_decimal res = {{0, 0, 0, 0}};");
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, two, &res), " + "{0});", exp_res);
 
         stream.WriteLine("  ck_assert_int_eq(res.bits[0], {0});", orig_bits[0]);
         stream.WriteLine("  ck_assert_int_eq(res.bits[1], {0});", orig_bits[1]);
@@ -78,10 +78,10 @@ class s21_decimal {
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("  //  {0}{{{{{1}, {2}, {3}, {4}}}}};", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_bits[0], orig_bits[1], orig_bits[2], orig_bits[3]);
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
-        stream.WriteLine("  s21_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
-        stream.WriteLine("  s21_decimal res = {{0, 0, 0, 0}};");
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, two, &res), " + "{0});", exp_res);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
+        stream.WriteLine("  es_decimal res = {{0, 0, 0, 0}};");
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, two, &res), " + "{0});", exp_res);
 
         stream.WriteLine("  ck_assert_int_eq(res.bits[0], {0});", orig_bits[0]);
         stream.WriteLine("  ck_assert_int_eq(res.bits[1], {0});", orig_bits[1]);
@@ -112,10 +112,10 @@ class s21_decimal {
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("  //  {0}{{{{{1}, {2}, {3}, {4}}}}};", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_bits[0], orig_bits[1], orig_bits[2], orig_bits[3]);
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
-        stream.WriteLine("  s21_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
-        stream.WriteLine("  s21_decimal res = {{0, 0, 0, 0}};");
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, two, &res), " + "{0});", exp_res);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
+        stream.WriteLine("  es_decimal res = {{0, 0, 0, 0}};");
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, two, &res), " + "{0});", exp_res);
 
         stream.WriteLine("  ck_assert_int_eq(res.bits[0], {0});", orig_bits[0]);
         stream.WriteLine("  ck_assert_int_eq(res.bits[1], {0});", orig_bits[1]);
@@ -148,10 +148,10 @@ class s21_decimal {
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("  //  {0}{{{{{1}, {2}, {3}, {4}}}}};", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_bits[0], orig_bits[1], orig_bits[2], orig_bits[3]);
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
-        stream.WriteLine("  s21_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
-        stream.WriteLine("  s21_decimal res = {{0, 0, 0, 0}};");
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, two, &res), " + "{0});", exp_res);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
+        stream.WriteLine("  es_decimal res = {{0, 0, 0, 0}};");
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, two, &res), " + "{0});", exp_res);
 
         stream.WriteLine("  ck_assert_int_eq(res.bits[0], {0});", orig_bits[0]);
         stream.WriteLine("  ck_assert_int_eq(res.bits[1], {0});", orig_bits[1]);
@@ -180,9 +180,9 @@ class s21_decimal {
         stream.WriteLine("  //   ------------------------------------------------");
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
-        stream.WriteLine("  s21_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, two), " + "{0});", orig_res);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, two), " + "{0});", orig_res);
         break;
       }
 
@@ -201,9 +201,9 @@ class s21_decimal {
         stream.WriteLine("  //   ------------------------------------------------");
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
-        stream.WriteLine("  s21_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, two), " + "{0});", orig_res);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, two), " + "{0});", orig_res);
         break;
       }
 
@@ -222,9 +222,9 @@ class s21_decimal {
         stream.WriteLine("  //   ------------------------------------------------");
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
-        stream.WriteLine("  s21_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, two), " + "{0});", orig_res);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, two), " + "{0});", orig_res);
         break;
       }
 
@@ -243,9 +243,9 @@ class s21_decimal {
         stream.WriteLine("  //   ------------------------------------------------");
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
-        stream.WriteLine("  s21_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, two), " + "{0});", orig_res);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, two), " + "{0});", orig_res);
         break;
       }
 
@@ -264,9 +264,9 @@ class s21_decimal {
         stream.WriteLine("  //   ------------------------------------------------");
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
-        stream.WriteLine("  s21_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, two), " + "{0});", orig_res);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, two), " + "{0});", orig_res);
         break;
       }
 
@@ -285,9 +285,9 @@ class s21_decimal {
         stream.WriteLine("  //   ------------------------------------------------");
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
-        stream.WriteLine("  s21_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, two), " + "{0});", orig_res);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal two = {{{{{0}, {1}, {2}, {3}}}}};", second[0], second[1], second[2], second[3]);
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, two), " + "{0});", orig_res);
         break;
       }
     }
@@ -327,9 +327,9 @@ class s21_decimal {
         stream.WriteLine("  //   -dec->int---------------------------------------");
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
         stream.WriteLine("  int res = 0;");
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, &res), " + "{0});", exp_res);
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, &res), " + "{0});", exp_res);
 
         stream.WriteLine("  ck_assert_int_eq(res, {0});", orig_res);
         break;
@@ -349,9 +349,9 @@ class s21_decimal {
         stream.WriteLine("  //   -dec->float-------------------------------------");
         stream.WriteLine("  //  {0}", orig_res);
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
         stream.WriteLine("  float res = 0;");
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, &res), " + "{0});", exp_res);
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, &res), " + "{0});", exp_res);
 
         stream.WriteLine("  ck_assert_float_eq(res, {0});", orig_res);
         break;
@@ -373,9 +373,9 @@ class s21_decimal {
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("  //  {0}{{{{{1}, {2}, {3}, {4}}}}};", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_bits[0], orig_bits[1], orig_bits[2], orig_bits[3]);
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
-        stream.WriteLine("  s21_decimal res = {{0, 0, 0, 0}};");
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, &res), " + "{0});", exp_res);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal res = {{0, 0, 0, 0}};");
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, &res), " + "{0});", exp_res);
 
         stream.WriteLine("  ck_assert_int_eq(res.bits[0], {0});", orig_bits[0]);
         stream.WriteLine("  ck_assert_int_eq(res.bits[1], {0});", orig_bits[1]);
@@ -400,9 +400,9 @@ class s21_decimal {
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("  //  {0}{{{{{1}, {2}, {3}, {4}}}}};", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_bits[0], orig_bits[1], orig_bits[2], orig_bits[3]);
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
-        stream.WriteLine("  s21_decimal res = {{0, 0, 0, 0}};");
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, &res), " + "{0});", exp_res);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal res = {{0, 0, 0, 0}};");
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, &res), " + "{0});", exp_res);
 
         stream.WriteLine("  ck_assert_int_eq(res.bits[0], {0});", orig_bits[0]);
         stream.WriteLine("  ck_assert_int_eq(res.bits[1], {0});", orig_bits[1]);
@@ -427,9 +427,9 @@ class s21_decimal {
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("  //  {0}{{{{{1}, {2}, {3}, {4}}}}};", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_bits[0], orig_bits[1], orig_bits[2], orig_bits[3]);
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
-        stream.WriteLine("  s21_decimal res = {{0, 0, 0, 0}};");
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, &res), " + "{0});", exp_res);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal res = {{0, 0, 0, 0}};");
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, &res), " + "{0});", exp_res);
 
         stream.WriteLine("  ck_assert_int_eq(res.bits[0], {0});", orig_bits[0]);
         stream.WriteLine("  ck_assert_int_eq(res.bits[1], {0});", orig_bits[1]);
@@ -454,9 +454,9 @@ class s21_decimal {
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("  //  {0}{{{{{1}, {2}, {3}, {4}}}}};", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_bits[0], orig_bits[1], orig_bits[2], orig_bits[3]);
         stream.WriteLine("");
-        stream.WriteLine("  s21_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
-        stream.WriteLine("  s21_decimal res = {{0, 0, 0, 0}};");
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, &res), " + "{0});", exp_res);
+        stream.WriteLine("  es_decimal one = {{{{{0}, {1}, {2}, {3}}}}};", first[0], first[1], first[2], first[3]);
+        stream.WriteLine("  es_decimal res = {{0, 0, 0, 0}};");
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, &res), " + "{0});", exp_res);
 
         stream.WriteLine("  ck_assert_int_eq(res.bits[0], {0});", orig_bits[0]);
         stream.WriteLine("  ck_assert_int_eq(res.bits[1], {0});", orig_bits[1]);
@@ -493,9 +493,9 @@ class s21_decimal {
           stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
           stream.WriteLine("");
           stream.WriteLine("  int one = {0};", first);
-          stream.WriteLine("  s21_decimal res_dec = {{0, 0, 0, 0}};");
+          stream.WriteLine("  es_decimal res_dec = {{0, 0, 0, 0}};");
           stream.WriteLine("");
-          stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, &res_dec), " + "{0});", exp_res);
+          stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, &res_dec), " + "{0});", exp_res);
           stream.WriteLine("  ck_assert_int_eq(res_dec.bits[0], {0});", orig_bits[0]);
           stream.WriteLine("  ck_assert_int_eq(res_dec.bits[1], {0});", orig_bits[1]);
           stream.WriteLine("  ck_assert_int_eq(res_dec.bits[2], {0});", orig_bits[2]);
@@ -537,9 +537,9 @@ class s21_decimal {
         stream.WriteLine("  //  {0}{1}", new string(' ', 32 - DotPosition(orig_res.ToString())), orig_res.ToString());
         stream.WriteLine("");
         stream.WriteLine("  float one = {0};", first);
-        stream.WriteLine("  s21_decimal res_dec = {{0, 0, 0, 0}};");
+        stream.WriteLine("  es_decimal res_dec = {{0, 0, 0, 0}};");
         stream.WriteLine("");
-        stream.WriteLine("  ck_assert_int_eq(s21_" + name + "(one, &res_dec), " + "{0});", exp_res);
+        stream.WriteLine("  ck_assert_int_eq(es_" + name + "(one, &res_dec), " + "{0});", exp_res);
         stream.WriteLine("  ck_assert_int_eq(res_dec.bits[0], {0});", orig_bits[0]);
         stream.WriteLine("  ck_assert_int_eq(res_dec.bits[1], {0});", orig_bits[1]);
         stream.WriteLine("  ck_assert_int_eq(res_dec.bits[2], {0});", orig_bits[2]);

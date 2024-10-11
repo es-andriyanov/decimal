@@ -1,41 +1,41 @@
 #suite get_sign_test
 
 #test get_sign_1
-  s21_decimal test = {{1, 2, 33, (int)0b00000000111111110000000000000000}};
+  es_decimal test = {{1, 2, 33, (int)0b00000000111111110000000000000000}};
   ck_assert_int_eq(get_sign(test), 1);
 
 #test get_sign_2
-  s21_decimal test = {{1, 2, 33, (int)0b00000000111111010000000000000000}};
+  es_decimal test = {{1, 2, 33, (int)0b00000000111111010000000000000000}};
   ck_assert_int_eq(get_sign(test), 1);
 
 #test get_sign_3
-  s21_decimal test = {{-1, -2, -33, (int)0b00000000000111110000000000000000}};
+  es_decimal test = {{-1, -2, -33, (int)0b00000000000111110000000000000000}};
   ck_assert_int_eq(get_sign(test), 1);
 
 #test get_sign_4
-  s21_decimal test = {{1, 2, 33, (int)0b00000000000000000000000000000000}};
+  es_decimal test = {{1, 2, 33, (int)0b00000000000000000000000000000000}};
   ck_assert_int_eq(get_sign(test), 1);
 
 #test get_sign_5
-  s21_decimal test = {{-1, 2, 33, (int)0b00000000000000010000000000000000}};
+  es_decimal test = {{-1, 2, 33, (int)0b00000000000000010000000000000000}};
   ck_assert_int_eq(get_sign(test), 1);
 
 #test get_sign_6
-  s21_decimal test = {{1, 2, 33, (int)0b10000000111111110000000000000000}};
+  es_decimal test = {{1, 2, 33, (int)0b10000000111111110000000000000000}};
   ck_assert_int_eq(get_sign(test), -1);
 
 #test get_sign_7
-  s21_decimal test = {{1, 2, 33, (int)0b10000000111111010000000000000000}};
+  es_decimal test = {{1, 2, 33, (int)0b10000000111111010000000000000000}};
   ck_assert_int_eq(get_sign(test), -1);
 
 #test get_sign_8
-  s21_decimal test = {{-1, -2, -33, (int)0b10000000000111110000000000000000}};
+  es_decimal test = {{-1, -2, -33, (int)0b10000000000111110000000000000000}};
   ck_assert_int_eq(get_sign(test), -1);
 
 #test get_sign_9
-  s21_decimal test = {{1, 2, 33, (int)0b10000000000000000000000000000000}};
+  es_decimal test = {{1, 2, 33, (int)0b10000000000000000000000000000000}};
   ck_assert_int_eq(get_sign(test), -1);
 
 #test get_sign_10
-  s21_decimal test = {{-1, 2, 33, (int)0b10000000000000010000000000000000}};
+  es_decimal test = {{-1, 2, 33, (int)0b10000000000000010000000000000000}};
   ck_assert_int_eq(get_sign(test), -1);
