@@ -1,0 +1,17 @@
+#suite my_pow_of_two_test
+
+#test my_pow_of_two_1
+  double res = my_pow_of_two(15) + my_pow_of_two(3) + my_pow_of_two(47);
+  ck_assert_double_eq(res, 140737488388104.000000);
+
+#test my_pow_of_two_2
+  double res = my_pow_of_two(2);
+  ck_assert_double_eq(res, 4);
+
+#test my_pow_of_two_3
+  double res = my_pow_of_two(0);
+  ck_assert_double_eq(res, 1);
+
+#test my_pow_of_two_4
+  double res = my_pow_of_two(1);
+  ck_assert_double_eq(res, 2);

@@ -1,0 +1,394 @@
+#suite from_int_to_decimal_test
+
+#test from_int_to_decimal_1
+  //                                 0
+  //   -int->dec---------------------------------------
+  //                                 0
+
+  int one = 0;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 0);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_int_to_decimal_2
+  //                                 1
+  //   -int->dec---------------------------------------
+  //                                 1
+
+  int one = 1;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 1);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_int_to_decimal_3
+  //                                 2
+  //   -int->dec---------------------------------------
+  //                                 2
+
+  int one = 2;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 2);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_int_to_decimal_4
+  //                                 3
+  //   -int->dec---------------------------------------
+  //                                 3
+
+  int one = 3;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 3);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_int_to_decimal_5
+  //                                 4
+  //   -int->dec---------------------------------------
+  //                                 4
+
+  int one = 4;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 4);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_int_to_decimal_6
+  //                                 5
+  //   -int->dec---------------------------------------
+  //                                 5
+
+  int one = 5;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 5);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_int_to_decimal_7
+  //                                 6
+  //   -int->dec---------------------------------------
+  //                                 6
+
+  int one = 6;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 6);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_int_to_decimal_8
+  //                                 7
+  //   -int->dec---------------------------------------
+  //                                 7
+
+  int one = 7;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 7);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_int_to_decimal_9
+  //                                 8
+  //   -int->dec---------------------------------------
+  //                                 8
+
+  int one = 8;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 8);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_int_to_decimal_10
+  //                                 9
+  //   -int->dec---------------------------------------
+  //                                 9
+
+  int one = 9;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 9);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_int_to_decimal_11
+  //                                10
+  //   -int->dec---------------------------------------
+  //                                10
+
+  int one = 10;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 10);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_int_to_decimal_12
+  //                                -1
+  //   -int->dec---------------------------------------
+  //                                -1
+
+  int one = -1;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 1);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_int_to_decimal_13
+  //                                -2
+  //   -int->dec---------------------------------------
+  //                                -2
+
+  int one = -2;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 2);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_int_to_decimal_14
+  //                                -3
+  //   -int->dec---------------------------------------
+  //                                -3
+
+  int one = -3;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 3);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_int_to_decimal_15
+  //                                -4
+  //   -int->dec---------------------------------------
+  //                                -4
+
+  int one = -4;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 4);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_int_to_decimal_16
+  //                                -5
+  //   -int->dec---------------------------------------
+  //                                -5
+
+  int one = -5;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 5);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_int_to_decimal_17
+  //                                -6
+  //   -int->dec---------------------------------------
+  //                                -6
+
+  int one = -6;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 6);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_int_to_decimal_18
+  //                                -7
+  //   -int->dec---------------------------------------
+  //                                -7
+
+  int one = -7;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 7);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_int_to_decimal_19
+  //                                -8
+  //   -int->dec---------------------------------------
+  //                                -8
+
+  int one = -8;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 8);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_int_to_decimal_20
+  //                                -9
+  //   -int->dec---------------------------------------
+  //                                -9
+
+  int one = -9;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 9);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_int_to_decimal_21
+  //                               -10
+  //   -int->dec---------------------------------------
+  //                               -10
+
+  int one = -10;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 10);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_int_to_decimal_22
+  //                        2147483647
+  //   -int->dec---------------------------------------
+  //                        2147483647
+
+  int one = 2147483647;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 2147483647);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_int_to_decimal_23
+  //                       -2147483647
+  //   -int->dec---------------------------------------
+  //                       -2147483647
+
+  int one = -2147483647;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 2147483647);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_int_to_decimal_24
+  //                       -2147483648
+  //   -int->dec---------------------------------------
+  //                       -2147483648
+
+  int one = -2147483648;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], -2147483648);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_int_to_decimal_25
+  //                             10000
+  //   -int->dec---------------------------------------
+  //                             10000
+
+  int one = 10000;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 10000);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_int_to_decimal_26
+  //                       -2146107392
+  //   -int->dec---------------------------------------
+  //                       -2146107392
+
+  int one = -2146107392;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 2146107392);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_int_to_decimal_27
+  //                       -2145976320
+  //   -int->dec---------------------------------------
+  //                       -2145976320
+
+  int one = -2145976320;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 2145976320);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_int_to_decimal_28
+  //                            917504
+  //   -int->dec---------------------------------------
+  //                            917504
+
+  int one = 917504;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_int_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 917504);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+

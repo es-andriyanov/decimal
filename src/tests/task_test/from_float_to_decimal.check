@@ -1,0 +1,421 @@
+#suite from_float_to_decimal_test
+
+#test from_float_to_decimal_1
+  //                              1234.56
+  //   -float->dec-------------------------------------
+  //                              1234.56
+
+  float one = 1234.56;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 123456);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 131072);
+
+#test from_float_to_decimal_2
+  //                                 1.333333E-15
+  //   -float->dec-------------------------------------
+  //                                 0.000000000000001333333
+
+  float one = 1.333333E-15;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 1333333);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 1376256);
+
+#test from_float_to_decimal_3
+  //                                 6.66E+14
+  //   -float->dec-------------------------------------
+  //                   666000000000000
+
+  float one = 6.66E+14;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 896245760);
+  ck_assert_int_eq(res_dec.bits[1], 155065);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_float_to_decimal_4
+  //                                 6
+  //   -float->dec-------------------------------------
+  //                                 6
+
+  float one = 6;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 6);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_float_to_decimal_5
+  //                                 1
+  //   -float->dec-------------------------------------
+  //                                 1
+
+  float one = 1;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 1);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_float_to_decimal_6
+  //                                 0
+  //   -float->dec-------------------------------------
+  //                                 0
+
+  float one = 0;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 0);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_float_to_decimal_7
+  //                                -1
+  //   -float->dec-------------------------------------
+  //                                -1
+
+  float one = -1;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 1);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], -2147483648);
+
+#test from_float_to_decimal_8
+  //                                10
+  //   -float->dec-------------------------------------
+  //                                10
+
+  float one = 10;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 10);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_float_to_decimal_9
+  //                               100
+  //   -float->dec-------------------------------------
+  //                               100
+
+  float one = 100;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 100);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_float_to_decimal_10
+  //                             1E-15
+  //   -float->dec-------------------------------------
+  //                                 0.000000000000001
+
+  float one = 1E-15;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 1);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 983040);
+
+#test from_float_to_decimal_11
+  //                                 1.1234568E-14
+  //   -float->dec-------------------------------------
+  //                                 0.00000000000001123457
+
+  float one = 1.1234568E-14;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 1123457);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 1310720);
+
+#test from_float_to_decimal_12
+  //                                 1.9876543E+30
+  //   -float->dec-------------------------------------
+  //                                 0
+
+  float one = 1.9876543E+30;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 1);
+  ck_assert_int_eq(res_dec.bits[0], 0);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_float_to_decimal_13
+  //                           1121233.1
+  //   -float->dec-------------------------------------
+  //                           1121233
+
+  float one = 1121233.1;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 1121233);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_float_to_decimal_14
+  //                                 1.5E-28
+  //   -float->dec-------------------------------------
+  //                                 0.0000000000000000000000000002
+
+  float one = 1.5E-28;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 2);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 1835008);
+
+#test from_float_to_decimal_15
+  //                                 1.9876543E+30
+  //   -float->dec-------------------------------------
+  //                                 0
+
+  float one = 1.9876543E+30;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 1);
+  ck_assert_int_eq(res_dec.bits[0], 0);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_float_to_decimal_16
+  //                                 7.9228163E+28
+  //   -float->dec-------------------------------------
+  //                                 0
+
+  float one = 7.9228163E+28;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 536870912);
+  ck_assert_int_eq(res_dec.bits[1], -1282231782);
+  ck_assert_int_eq(res_dec.bits[2], -137);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_float_to_decimal_17
+  //                                 5.000001
+  //   -float->dec-------------------------------------
+  //                                 5.000001
+
+  float one = 5.000001;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 5000001);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 393216);
+
+#test from_float_to_decimal_18
+  //                                 5.0000014
+  //   -float->dec-------------------------------------
+  //                                 5.000001
+
+  float one = 5.0000014;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 5000001);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 393216);
+
+#test from_float_to_decimal_19
+  //                                 5.0000014
+  //   -float->dec-------------------------------------
+  //                                 5.000001
+
+  float one = 5.0000014;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 5000001);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 393216);
+
+#test from_float_to_decimal_20
+  //                             1E-06
+  //   -float->dec-------------------------------------
+  //                                 0.0000010
+
+  float one = 1E-06;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 1);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 393216);
+
+#test from_float_to_decimal_21
+  //                                 1.4E-06
+  //   -float->dec-------------------------------------
+  //                                 0.0000014
+
+  float one = 1.4E-06;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 14);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 458752);
+
+#test from_float_to_decimal_22
+  //                                 1.6E-06
+  //   -float->dec-------------------------------------
+  //                                 0.0000016
+
+  float one = 1.6E-06;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 16);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 458752);
+
+#test from_float_to_decimal_23
+  //                             1E+14
+  //   -float->dec-------------------------------------
+  //                   100000000000000
+
+  float one = 1E+14;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 276447232);
+  ck_assert_int_eq(res_dec.bits[1], 23283);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_float_to_decimal_24
+  //                                 7.922816E+28
+  //   -float->dec-------------------------------------
+  //     79228160000000000000000000000
+
+  float one = 7.922816E+28;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 536870912);
+  ck_assert_int_eq(res_dec.bits[1], -1282231782);
+  ck_assert_int_eq(res_dec.bits[2], -137);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_float_to_decimal_25
+  //                                 1.3E-28
+  //   -float->dec-------------------------------------
+  //                                 0.0000000000000000000000000001
+
+  float one = 1.3E-28;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 1);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 1835008);
+
+#test from_float_to_decimal_26
+  //                                 1.4E-28
+  //   -float->dec-------------------------------------
+  //                                 0.0000000000000000000000000001
+
+  float one = 1.4E-28;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 1);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 1835008);
+
+#test from_float_to_decimal_27
+  //                                 1.6E-28
+  //   -float->dec-------------------------------------
+  //                                 0.0000000000000000000000000002
+
+  float one = 1.6E-28;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 2);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 1835008);
+
+#test from_float_to_decimal_28
+  //                                 7.922817E+28
+  //   -float->dec-------------------------------------
+  //                                 0
+
+  float one = 7.922817E+28;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 1);
+  ck_assert_int_eq(res_dec.bits[0], 0);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_float_to_decimal_29
+  //                                -7.922817E+28
+  //   -float->dec-------------------------------------
+  //                                 0
+
+  float one = -7.922817E+28;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 1);
+  ck_assert_int_eq(res_dec.bits[0], 0);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 0);
+
+#test from_float_to_decimal_30
+  //                                 7.922817E-28
+  //   -float->dec-------------------------------------
+  //                                 0.0000000000000000000000000008
+
+  float one = 7.922817E-28;
+  es_decimal res_dec = {{0, 0, 0, 0}};
+
+  ck_assert_int_eq(es_from_float_to_decimal(one, &res_dec), 0);
+  ck_assert_int_eq(res_dec.bits[0], 8);
+  ck_assert_int_eq(res_dec.bits[1], 0);
+  ck_assert_int_eq(res_dec.bits[2], 0);
+  ck_assert_int_eq(res_dec.bits[3], 1835008);

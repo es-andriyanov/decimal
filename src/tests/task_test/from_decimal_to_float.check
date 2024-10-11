@@ -1,0 +1,332 @@
+#suite from_decimal_to_float_test
+
+#test from_decimal_to_float_1
+  //                            553402.32229718589441
+  //   -dec->float-------------------------------------
+  //  553402.3
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 553402.3);
+
+#test from_decimal_to_float_2
+  //                           -553402.32229718589441
+  //   -dec->float-------------------------------------
+  //  -553402.3
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -553402.3);
+
+#test from_decimal_to_float_3
+  //                               -55.340232221137244782625
+  //   -dec->float-------------------------------------
+  //  -55.340233
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -55.340233);
+
+#test from_decimal_to_float_4
+  //                                 0.055340232650625384458
+  //   -dec->float-------------------------------------
+  //  0.055340234
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 0.055340234);
+
+#test from_decimal_to_float_5
+  //                           5534023.2650625384464
+  //   -dec->float-------------------------------------
+  //  5534023.5
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 5534023.5);
+
+#test from_decimal_to_float_6
+  //                               -63.31900243533454217608892
+  //   -dec->float-------------------------------------
+  //  -63.319004
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -63.319004);
+
+#test from_decimal_to_float_7
+  //                            184467.44078004518913
+  //   -dec->float-------------------------------------
+  //  184467.44
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 184467.44);
+
+#test from_decimal_to_float_8
+  //                                 0.0000000000000
+  //   -dec->float-------------------------------------
+  //  0
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 0);
+
+#test from_decimal_to_float_9
+  //                                 0.00000000000000
+  //   -dec->float-------------------------------------
+  //  0
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 0);
+
+#test from_decimal_to_float_10
+  //               1844674407800451891.3
+  //   -dec->float-------------------------------------
+  //  1.8446744E+18
+
+  es_decimal one = {{1, 1, 1, 65536}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 1.8446744E+18);
+
+#test from_decimal_to_float_11
+  //                        1844674407.8004518913
+  //   -dec->float-------------------------------------
+  //  1.8446744E+09
+
+  es_decimal one = {{1, 1, 1, 655360}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 1.8446744E+09);
+
+#test from_decimal_to_float_12
+  //              -1844674407800451893.6
+  //   -dec->float-------------------------------------
+  //  -1.8446744E+18
+
+  es_decimal one = {{24, 1, 1, -2147418112}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -1.8446744E+18);
+
+#test from_decimal_to_float_13
+  //                        1844674413.8134061057
+  //   -dec->float-------------------------------------
+  //  1.8446744E+09
+
+  es_decimal one = {{1, 15, 1, 655360}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 1.8446744E+09);
+
+#test from_decimal_to_float_14
+  //              -1844674407800451891.3
+  //   -dec->float-------------------------------------
+  //  -1.8446744E+18
+
+  es_decimal one = {{1, 1, 1, -2147418112}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -1.8446744E+18);
+
+#test from_decimal_to_float_15
+  //                                 0.0000000001
+  //   -dec->float-------------------------------------
+  //  1E-10
+
+  es_decimal one = {{1, 0, 0, 655360}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 1E-10);
+
+#test from_decimal_to_float_16
+  //                                -0.0000000001
+  //   -dec->float-------------------------------------
+  //  -1E-10
+
+  es_decimal one = {{1, 0, 0, -2146828288}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -1E-10);
+
+#test from_decimal_to_float_17
+  //                            184467.44073709551617
+  //   -dec->float-------------------------------------
+  //  184467.44
+
+  es_decimal one = {{1, 0, 1, 917504}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 184467.44);
+
+#test from_decimal_to_float_18
+  //                             18446.744078004518913
+  //   -dec->float-------------------------------------
+  //  18446.744
+
+  es_decimal one = {{1, 1, 1, 983040}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 18446.744);
+
+#test from_decimal_to_float_19
+  //                            -18446.744116659224577
+  //   -dec->float-------------------------------------
+  //  -18446.744
+
+  es_decimal one = {{1, 10, 1, -2146500608}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -18446.744);
+
+#test from_decimal_to_float_20
+  //                            -18446.744078004518913
+  //   -dec->float-------------------------------------
+  //  -18446.744
+
+  es_decimal one = {{1, 1, 1, -2146500608}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -18446.744);
+
+#test from_decimal_to_float_21
+  //                       -1844674407.8004518913
+  //   -dec->float-------------------------------------
+  //  -1.8446744E+09
+
+  es_decimal one = {{1, 1, 1, -2146828288}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -1.8446744E+09);
+
+#test from_decimal_to_float_22
+  //              -5534023222971858944.1
+  //   -dec->float-------------------------------------
+  //  -5.5340234E+18
+
+  es_decimal one = {{1, 2, 3, -2147418112}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -5.5340234E+18);
+
+#test from_decimal_to_float_23
+  //                       -1844674408.2299486211
+  //   -dec->float-------------------------------------
+  //  -1.8446744E+09
+
+  es_decimal one = {{3, 2, 1, -2146828288}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -1.8446744E+09);
+
+#test from_decimal_to_float_24
+  //                        5534023222.9718589441
+  //   -dec->float-------------------------------------
+  //  5.534023E+09
+
+  es_decimal one = {{1, 2, 3, 655360}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 5.534023E+09);
+
+#test from_decimal_to_float_25
+  //                       -5534023222.9718589441
+  //   -dec->float-------------------------------------
+  //  -5.534023E+09
+
+  es_decimal one = {{1, 2, 3, -2146828288}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -5.534023E+09);
+
+#test from_decimal_to_float_26
+  //                     -184467440822.99486211
+  //   -dec->float-------------------------------------
+  //  -1.8446744E+11
+
+  es_decimal one = {{3, 2, 1, -2146959360}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -1.8446744E+11);
+
+#test from_decimal_to_float_27
+  //                           -553402.32229718589450
+  //   -dec->float-------------------------------------
+  //  -553402.3
+
+  es_decimal one = {{10, 2, 3, -2146566144}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -553402.3);
+
+#test from_decimal_to_float_28
+  //                      184467440822.99486211
+  //   -dec->float-------------------------------------
+  //  1.8446744E+11
+
+  es_decimal one = {{3, 2, 1, 524288}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 1.8446744E+11);
+
+#test from_decimal_to_float_29
+  //                                10
+  //   -dec->float-------------------------------------
+  //  10
+
+  es_decimal one = {{10, 0, 0, 0}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 10);
+
+#test from_decimal_to_float_30
+  //                        -133456435
+  //   -dec->float-------------------------------------
+  //  -133456430
+
+  es_decimal one = {{133456435, 0, 0, -2147483648}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -133456430);
+
+#test from_decimal_to_float_31
+  //                                -0.2343453
+  //   -dec->float-------------------------------------
+  //  -0.2343453
+
+  es_decimal one = {{2343453, 0, 0, -2147024896}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -0.2343453);
+
+#test from_decimal_to_float_32
+  //                               127.2343
+  //   -dec->float-------------------------------------
+  //  127.2343
+
+  es_decimal one = {{1272343, 0, 0, 262144}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, 127.2343);
+
+#test from_decimal_to_float_33
+  //                       -2147483648
+  //   -dec->float-------------------------------------
+  //  -2.1474836E+09
+
+  es_decimal one = {{-2147483648, 0, 0, -2147483648}};
+  float res = 0;
+  ck_assert_int_eq(es_from_decimal_to_float(one, &res), 0);
+  ck_assert_float_eq(res, -2.1474836E+09);
+

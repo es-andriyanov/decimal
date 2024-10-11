@@ -1,0 +1,464 @@
+#suite floor_test
+
+#test floor_1
+  //                            553402.32229718589441
+  //   -floor------------------------------------------
+  //                            553402
+  //                            {{553402, 0, 0, 0}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 553402);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_2
+  //                           -553402.32229718589441
+  //   -floor------------------------------------------
+  //                           -553403
+  //                           {{553403, 0, 0, -2147483648}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 553403);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_3
+  //                               -55.340232221137244782625
+  //   -floor------------------------------------------
+  //                               -56
+  //                               {{56, 0, 0, -2147483648}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 56);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_4
+  //                                 0.055340232650625384458
+  //   -floor------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_5
+  //                           5534023.2650625384464
+  //   -floor------------------------------------------
+  //                           5534023
+  //                           {{5534023, 0, 0, 0}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 5534023);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_6
+  //                               -63.31900243533454217608892
+  //   -floor------------------------------------------
+  //                               -64
+  //                               {{64, 0, 0, -2147483648}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 64);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_7
+  //                            184467.44078004518913
+  //   -floor------------------------------------------
+  //                            184467
+  //                            {{184467, 0, 0, 0}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 184467);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_8
+  //                                 0.0000000000000
+  //   -floor------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_9
+  //                                 0.00000000000000
+  //   -floor------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_10
+  //               1844674407800451891.3
+  //   -floor------------------------------------------
+  //               1844674407800451891
+  //               {{-1288490189, 429496729, 0, 0}};
+
+  es_decimal one = {{1, 1, 1, 65536}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1288490189);
+  ck_assert_int_eq(res.bits[1], 429496729);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_11
+  //                        1844674407.8004518913
+  //   -floor------------------------------------------
+  //                        1844674407
+  //                        {{1844674407, 0, 0, 0}};
+
+  es_decimal one = {{1, 1, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1844674407);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_12
+  //              -1844674407800451893.6
+  //   -floor------------------------------------------
+  //              -1844674407800451894
+  //              {{-1288490186, 429496729, 0, -2147483648}};
+
+  es_decimal one = {{24, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1288490186);
+  ck_assert_int_eq(res.bits[1], 429496729);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_13
+  //                        1844674413.8134061057
+  //   -floor------------------------------------------
+  //                        1844674413
+  //                        {{1844674413, 0, 0, 0}};
+
+  es_decimal one = {{1, 15, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1844674413);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_14
+  //              -1844674407800451891.3
+  //   -floor------------------------------------------
+  //              -1844674407800451892
+  //              {{-1288490188, 429496729, 0, -2147483648}};
+
+  es_decimal one = {{1, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1288490188);
+  ck_assert_int_eq(res.bits[1], 429496729);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_15
+  //                                 0.0000000001
+  //   -floor------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{1, 0, 0, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_16
+  //                                -0.0000000001
+  //   -floor------------------------------------------
+  //                                -1
+  //                                {{1, 0, 0, -2147483648}};
+
+  es_decimal one = {{1, 0, 0, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_17
+  //                            184467.44073709551617
+  //   -floor------------------------------------------
+  //                            184467
+  //                            {{184467, 0, 0, 0}};
+
+  es_decimal one = {{1, 0, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 184467);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_18
+  //                             18446.744078004518913
+  //   -floor------------------------------------------
+  //                             18446
+  //                             {{18446, 0, 0, 0}};
+
+  es_decimal one = {{1, 1, 1, 983040}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 18446);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_19
+  //                            -18446.744116659224577
+  //   -floor------------------------------------------
+  //                            -18447
+  //                            {{18447, 0, 0, -2147483648}};
+
+  es_decimal one = {{1, 10, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 18447);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_20
+  //                            -18446.744078004518913
+  //   -floor------------------------------------------
+  //                            -18447
+  //                            {{18447, 0, 0, -2147483648}};
+
+  es_decimal one = {{1, 1, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 18447);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_21
+  //                       -1844674407.8004518913
+  //   -floor------------------------------------------
+  //                       -1844674408
+  //                       {{1844674408, 0, 0, -2147483648}};
+
+  es_decimal one = {{1, 1, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1844674408);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_22
+  //              -5534023222971858944.1
+  //   -floor------------------------------------------
+  //              -5534023222971858945
+  //              {{1, 1288490189, 0, -2147483648}};
+
+  es_decimal one = {{1, 2, 3, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 1288490189);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_23
+  //                       -1844674408.2299486211
+  //   -floor------------------------------------------
+  //                       -1844674409
+  //                       {{1844674409, 0, 0, -2147483648}};
+
+  es_decimal one = {{3, 2, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1844674409);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_24
+  //                        5534023222.9718589441
+  //   -floor------------------------------------------
+  //                        5534023222
+  //                        {{1239055926, 1, 0, 0}};
+
+  es_decimal one = {{1, 2, 3, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1239055926);
+  ck_assert_int_eq(res.bits[1], 1);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_25
+  //                       -5534023222.9718589441
+  //   -floor------------------------------------------
+  //                       -5534023223
+  //                       {{1239055927, 1, 0, -2147483648}};
+
+  es_decimal one = {{1, 2, 3, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1239055927);
+  ck_assert_int_eq(res.bits[1], 1);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_26
+  //                     -184467440822.99486211
+  //   -floor------------------------------------------
+  //                     -184467440823
+  //                     {{-216152905, 42, 0, -2147483648}};
+
+  es_decimal one = {{3, 2, 1, -2146959360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], -216152905);
+  ck_assert_int_eq(res.bits[1], 42);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_27
+  //                           -553402.32229718589450
+  //   -floor------------------------------------------
+  //                           -553403
+  //                           {{553403, 0, 0, -2147483648}};
+
+  es_decimal one = {{10, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 553403);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_28
+  //                      184467440822.99486211
+  //   -floor------------------------------------------
+  //                      184467440822
+  //                      {{-216152906, 42, 0, 0}};
+
+  es_decimal one = {{3, 2, 1, 524288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], -216152906);
+  ck_assert_int_eq(res.bits[1], 42);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_29
+  //                                10
+  //   -floor------------------------------------------
+  //                                10
+  //                                {{10, 0, 0, 0}};
+
+  es_decimal one = {{10, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 10);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_30
+  //                        -133456435
+  //   -floor------------------------------------------
+  //                        -133456435
+  //                        {{133456435, 0, 0, -2147483648}};
+
+  es_decimal one = {{133456435, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 133456435);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_31
+  //                                -0.2343453
+  //   -floor------------------------------------------
+  //                                -1
+  //                                {{1, 0, 0, -2147483648}};
+
+  es_decimal one = {{2343453, 0, 0, -2147024896}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test floor_32
+  //                               127.2343
+  //   -floor------------------------------------------
+  //                               127
+  //                               {{127, 0, 0, 0}};
+
+  es_decimal one = {{1272343, 0, 0, 262144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], 127);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test floor_33
+  //                       -2147483648
+  //   -floor------------------------------------------
+  //                       -2147483648
+  //                       {{-2147483648, 0, 0, -2147483648}};
+
+  es_decimal one = {{-2147483648, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_floor(one, &res), 0);
+  ck_assert_int_eq(res.bits[0], -2147483648);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+

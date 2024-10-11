@@ -1,0 +1,28 @@
+#suite copy_bits_dec_test
+
+#test copy_bits_dec_1
+  s21_decimal test = {{1, 2, 33, (int)0b00000000111111100000000000000000}};
+  s21_decimal res = {{0, 0, 0, 0}};
+  copy_bits_dec(test, &res);
+  ck_assert_int_eq(test.bits[0], res.bits[0]);
+  ck_assert_int_eq(test.bits[1], res.bits[1]);
+  ck_assert_int_eq(test.bits[2], res.bits[2]);
+  ck_assert_int_eq(test.bits[3], res.bits[3]);
+
+#test copy_bits_dec_2
+  s21_decimal test = {{-1, -2, -33, (int)0b00000000001111000000000000000000}};
+  s21_decimal res = {{0, 0, 0, 0}};
+  copy_bits_dec(test, &res);
+  ck_assert_int_eq(test.bits[0], res.bits[0]);
+  ck_assert_int_eq(test.bits[1], res.bits[1]);
+  ck_assert_int_eq(test.bits[2], res.bits[2]);
+  ck_assert_int_eq(test.bits[3], res.bits[3]);
+
+#test copy_bits_dec_3
+  s21_decimal test = {{1, 299999, -3300000, (int)0b10000000000111000000000000000000}};
+  s21_decimal res = {{0, 0, 0, 0}};
+  copy_bits_dec(test, &res);
+  ck_assert_int_eq(test.bits[0], res.bits[0]);
+  ck_assert_int_eq(test.bits[1], res.bits[1]);
+  ck_assert_int_eq(test.bits[2], res.bits[2]);
+  ck_assert_int_eq(test.bits[3], res.bits[3]);

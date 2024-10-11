@@ -1,0 +1,66 @@
+#suite two_dec_to_big_test
+
+#test two_dec_to_big_1
+  s21_decimal one = {{1, 2, 3, 917504}};  // 553402.32229718589441
+  s21_decimal two = {{1, 2, 3, -2146566144}};  // -553402.32229718589441
+  BIG_decimal bone = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal btwo = {{0, 0, 0, 0, 0, 0}};
+  unsigned int scale = 0;
+  int returned = two_dec_to_big(one, two, &bone, &btwo, &scale, ADD_SUB);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_uint_eq(scale, 14);
+  ck_assert_int_eq(bone.bits[0], one.bits[0]);
+  ck_assert_int_eq(bone.bits[1], one.bits[1]);
+  ck_assert_int_eq(bone.bits[2], one.bits[2]);
+  ck_assert_int_eq(btwo.bits[0], two.bits[0]);
+  ck_assert_int_eq(btwo.bits[1], two.bits[1]);
+  ck_assert_int_eq(btwo.bits[2], two.bits[2]);
+
+#test two_dec_to_big_2
+  s21_decimal one = {{8, 0, 0, 65536}}; // 0.8 -> 8
+  s21_decimal two = {{10, 0, 0, 0}};    // 10  -> 100
+  BIG_decimal bone = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal btwo = {{0, 0, 0, 0, 0, 0}};
+  unsigned int scale = 0;
+  int returned = two_dec_to_big(one, two, &bone, &btwo, &scale, ADD_SUB);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_uint_eq(scale, 1);
+  ck_assert_int_eq(bone.bits[0], one.bits[0]);
+  ck_assert_int_eq(bone.bits[1], one.bits[1]);
+  ck_assert_int_eq(bone.bits[2], one.bits[2]);
+  ck_assert_int_eq(btwo.bits[0], 0b00000000000000000000000001100100);
+  ck_assert_int_eq(btwo.bits[1], two.bits[1]);
+  ck_assert_int_eq(btwo.bits[2], two.bits[2]);
+
+#test two_dec_to_big_3
+  s21_decimal one = {{8, 0, 0, 65536}};     // 0.8 -> 8
+  s21_decimal two = {{10, 0, 0, 65536}};    // 1.0  -> 10
+  BIG_decimal bone = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal btwo = {{0, 0, 0, 0, 0, 0}};
+  unsigned int scale = 0;
+  int returned = two_dec_to_big(one, two, &bone, &btwo, &scale, ADD_SUB);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_uint_eq(scale, 1);
+  ck_assert_int_eq(bone.bits[0], one.bits[0]);
+  ck_assert_int_eq(bone.bits[1], one.bits[1]);
+  ck_assert_int_eq(bone.bits[2], one.bits[2]);
+  ck_assert_int_eq(btwo.bits[0], two.bits[0]);
+  ck_assert_int_eq(btwo.bits[1], two.bits[1]);
+  ck_assert_int_eq(btwo.bits[2], two.bits[2]);
+
+
+#test two_dec_to_big_4
+  s21_decimal one = {{1, 0, 0, 0}};         // 1    -> 10
+  s21_decimal two = {{10, 0, 0, 65536}};    // 1.0  -> 10
+  BIG_decimal bone = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal btwo = {{0, 0, 0, 0, 0, 0}};
+  unsigned int scale = 0;
+  int returned = two_dec_to_big(one, two, &bone, &btwo, &scale, ADD_SUB);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_uint_eq(scale, 1);
+  ck_assert_int_eq(bone.bits[0], 10);
+  ck_assert_int_eq(bone.bits[1], one.bits[1]);
+  ck_assert_int_eq(bone.bits[2], one.bits[2]);
+  ck_assert_int_eq(btwo.bits[0], two.bits[0]);
+  ck_assert_int_eq(btwo.bits[1], two.bits[1]);
+  ck_assert_int_eq(btwo.bits[2], two.bits[2]);

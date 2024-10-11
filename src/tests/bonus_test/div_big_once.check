@@ -1,0 +1,187 @@
+#suite div_big_once_test
+
+#test div_big_once_1
+  BIG_decimal test1 = {{10, 0, 0, 0, 0, 0}};
+  BIG_decimal test2 = {{10, 0, 0, 0, 0, 0}};
+  BIG_decimal res = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal fraction = {{0, 0, 0, 0, 0, 0}};
+
+  int returned = div_big_once(test1, test2, &res, &fraction);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(res.bits[0], (int)0b00000000000000000000000000000001);
+  ck_assert_int_eq(res.bits[1], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[2], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[3], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[4], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[5], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(fraction.bits[0], 0);
+
+#test div_big_once_2
+  BIG_decimal test1 = {{11, 0, 0, 0, 0, 0}};
+  BIG_decimal test2 = {{10, 0, 0, 0, 0, 0}};
+  BIG_decimal res = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal fraction = {{0, 0, 0, 0, 0, 0}};
+
+  int returned = div_big_once(test1, test2, &res, &fraction);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(res.bits[0], (int)0b00000000000000000000000000000001);
+  ck_assert_int_eq(res.bits[1], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[2], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[3], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[4], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[5], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(fraction.bits[0], 1);
+
+#test div_big_once_3
+  BIG_decimal test1 = {{20, 0, 0, 0, 0, 0}};
+  BIG_decimal test2 = {{10, 0, 0, 0, 0, 0}};
+  BIG_decimal res = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal fraction = {{0, 0, 0, 0, 0, 0}};
+
+  int returned = div_big_once(test1, test2, &res, &fraction);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(res.bits[0], (int)0b00000000000000000000000000000010);
+  ck_assert_int_eq(res.bits[1], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[2], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[3], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[4], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[5], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(fraction.bits[0], 0);
+
+#test div_big_once_4
+  BIG_decimal test1 = {{21, 0, 0, 0, 0, 0}};
+  BIG_decimal test2 = {{10, 0, 0, 0, 0, 0}};
+  BIG_decimal res = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal fraction = {{0, 0, 0, 0, 0, 0}};
+
+  int returned = div_big_once(test1, test2, &res, &fraction);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(res.bits[0], (int)0b00000000000000000000000000000010);
+  ck_assert_int_eq(res.bits[1], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[2], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[3], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[4], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[5], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(fraction.bits[0], 1);
+
+#test div_big_once_5
+  BIG_decimal test1 = {{-1, -1, -1, -1, -1, -1}};
+  BIG_decimal test2 = {{10, 0, 0, 0, 0, 0}};
+  BIG_decimal res = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal fraction = {{0, 0, 0, 0, 0, 0}};
+
+  int returned = div_big_once(test1, test2, &res, &fraction);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(res.bits[0], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(res.bits[1], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(res.bits[2], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(res.bits[3], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(res.bits[4], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(res.bits[5], (int)0b00011001100110011001100110011001);
+  ck_assert_int_eq(fraction.bits[0], 5);
+
+#test div_big_once_6
+  BIG_decimal test1 = {{10, 1, 0, 0, 0, 0}};
+  BIG_decimal test2 = {{10, 1, 0, 0, 0, 0}};
+  BIG_decimal res = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal fraction = {{0, 0, 0, 0, 0, 0}};
+
+  int returned = div_big_once(test1, test2, &res, &fraction);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(res.bits[0], (int)0b00000000000000000000000000000001);
+  ck_assert_int_eq(res.bits[1], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[2], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[3], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[4], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[5], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(fraction.bits[0], 0);
+
+#test div_big_once_7
+  BIG_decimal test1 = {{-1, -1, -1, -1, -1, -1}};
+  BIG_decimal test2 = {{-1, -1, -1, -1, -1, -1}};
+  BIG_decimal res = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal fraction = {{0, 0, 0, 0, 0, 0}};
+
+  int returned = div_big_once(test1, test2, &res, &fraction);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(res.bits[0], (int)0b00000000000000000000000000000001);
+  ck_assert_int_eq(res.bits[1], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[2], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[3], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[4], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(res.bits[5], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(fraction.bits[0], 0);
+
+#test div_big_once_8
+  BIG_decimal test1 = {{-1, -1, -1, -1, -1, -1}};
+  BIG_decimal test2 = {{1, 0, 0, 0, 0, 0}};
+  BIG_decimal res = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal fraction = {{0, 0, 0, 0, 0, 0}};
+
+  int returned = div_big_once(test1, test2, &res, &fraction);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(res.bits[0], (int)0b11111111111111111111111111111111);
+  ck_assert_int_eq(res.bits[1], (int)0b11111111111111111111111111111111);
+  ck_assert_int_eq(res.bits[2], (int)0b11111111111111111111111111111111);
+  ck_assert_int_eq(res.bits[3], (int)0b11111111111111111111111111111111);
+  ck_assert_int_eq(res.bits[4], (int)0b11111111111111111111111111111111);
+  ck_assert_int_eq(res.bits[5], (int)0b11111111111111111111111111111111);
+  ck_assert_int_eq(fraction.bits[0], 0);
+
+#test div_big_once_9
+  BIG_decimal test1 = {{1, 2, 3, 0, 0, 0}};
+  BIG_decimal test2 = {{3, 0, 0, 0, 0, 0}};
+  BIG_decimal res = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal fraction = {{0, 0, 0, 0, 0, 0}};
+
+  int returned = div_big_once(test1, test2, &res, &fraction);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(res.bits[0], -1431655765);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 1);
+  ck_assert_int_eq(res.bits[3], 0);
+  ck_assert_int_eq(res.bits[4], 0);
+  ck_assert_int_eq(res.bits[5], 0);
+  ck_assert_int_eq(fraction.bits[0], 0);
+
+#test div_big_once_10
+  BIG_decimal test1 = {{1, 0, 0, 0, 0, 0}};
+  BIG_decimal test2 = {{1, 2, 3, 0, 0, 0}};
+  BIG_decimal res = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal fraction = {{0, 0, 0, 0, 0, 0}};
+
+  int returned = div_big_once(test1, test2, &res, &fraction);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+  ck_assert_int_eq(res.bits[4], 0);
+  ck_assert_int_eq(res.bits[5], 0);
+  ck_assert_int_eq(fraction.bits[0], 1);
+  ck_assert_int_eq(fraction.bits[1], 0);
+  ck_assert_int_eq(fraction.bits[2], 0);
+  ck_assert_int_eq(fraction.bits[3], 0);
+  ck_assert_int_eq(fraction.bits[4], 0);
+  ck_assert_int_eq(fraction.bits[5], 0);
+
+#test div_big_once_11
+  BIG_decimal test1 = {{-13513, 135135, 1, 0, 0, 0}};
+  BIG_decimal test2 = {{1, 2, 3, 0, 0, 0}};
+  BIG_decimal res = {{0, 0, 0, 0, 0, 0}};
+  BIG_decimal fraction = {{0, 0, 0, 0, 0, 0}};
+
+  int returned = div_big_once(test1, test2, &res, &fraction);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+  ck_assert_int_eq(res.bits[4], 0);
+  ck_assert_int_eq(res.bits[5], 0);
+  ck_assert_int_eq(fraction.bits[0], -13513);
+  ck_assert_int_eq(fraction.bits[1], 135135);
+  ck_assert_int_eq(fraction.bits[2], 1);
+  ck_assert_int_eq(fraction.bits[3], 0);
+  ck_assert_int_eq(fraction.bits[4], 0);
+  ck_assert_int_eq(fraction.bits[5], 0);

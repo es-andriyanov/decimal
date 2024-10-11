@@ -1,0 +1,4465 @@
+#suite div_test
+
+#test div_1
+  //                            553402.32229718589441
+  // /                          553402.32229718589441
+  //   ------------------------------------------------
+  //                                 1
+  //                                 {{1, 0, 0, 0}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 2, 3, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_2
+  //                            553402.32229718589441
+  // /                         -553402.32229718589441
+  //   ------------------------------------------------
+  //                                -1
+  //                                {{1, 0, 0, -2147483648}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test div_3
+  //                            553402.32229718589441
+  // /                             -55.340232221137244782625
+  //   ------------------------------------------------
+  //                            -10000.000001550652086909268286
+  //                            {{-1972244162, 1403652156, 542101086, -2145910784}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{33, 2, 3000, -2146107392}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1972244162);
+  ck_assert_int_eq(res.bits[1], 1403652156);
+  ck_assert_int_eq(res.bits[2], 542101086);
+  ck_assert_int_eq(res.bits[3], -2145910784);
+
+#test div_4
+  //                            553402.32229718589441
+  // /                               0.055340232650625384458
+  //   ------------------------------------------------
+  //                           9999999.923941990328397462875
+  //                           {{820510043, 513846670, 542101082, 1376256}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{10, 100, 3, 1376256}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 820510043);
+  ck_assert_int_eq(res.bits[1], 513846670);
+  ck_assert_int_eq(res.bits[2], 542101082);
+  ck_assert_int_eq(res.bits[3], 1376256);
+
+#test div_5
+  //                            553402.32229718589441
+  // /                         5534023.2650625384464
+  //   ------------------------------------------------
+  //                                 0.0999999992394199032731326072
+  //                                 {{832624248, 910378126, 54210108, 1835008}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{16, 100, 3, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 832624248);
+  ck_assert_int_eq(res.bits[1], 910378126);
+  ck_assert_int_eq(res.bits[2], 54210108);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_6
+  //                            553402.32229718589441
+  // /                             -63.31900243533454217608892
+  //   ------------------------------------------------
+  //                             -8739.909048035873817509722072
+  //                             {{-381192232, -599961551, 473791418, -2145910784}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{32444, 100, 343253, -2145976320}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -381192232);
+  ck_assert_int_eq(res.bits[1], -599961551);
+  ck_assert_int_eq(res.bits[2], 473791418);
+  ck_assert_int_eq(res.bits[3], -2145910784);
+
+#test div_7
+  //                            553402.32229718589441
+  // /                          184467.44078004518913
+  //   ------------------------------------------------
+  //                                 2.9999999997671693562919202625
+  //                                 {{-779407551, -1709229884, 1626303258, 1835008}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 1, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -779407551);
+  ck_assert_int_eq(res.bits[1], -1709229884);
+  ck_assert_int_eq(res.bits[2], 1626303258);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_8
+  //                            553402.32229718589441
+  // /                               0.0000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{0, 0, 0, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_9
+  //                            553402.32229718589441
+  // /                               0.00000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{0, 0, 0, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_10
+  //                            553402.32229718589441
+  // /             1844674407800451891.3
+  //   ------------------------------------------------
+  //                                 0.0000000000002999999999767169
+  //                                 {{-296750463, 698491, 0, 1835008}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 1, 1, 65536}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -296750463);
+  ck_assert_int_eq(res.bits[1], 698491);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_11
+  //                            553402.32229718589441
+  // /                      1844674407.8004518913
+  //   ------------------------------------------------
+  //                                 0.000299999999976716935629192
+  //                                 {{-524809848, 139955891, 16263, 1769472}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 1, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -524809848);
+  ck_assert_int_eq(res.bits[1], 139955891);
+  ck_assert_int_eq(res.bits[2], 16263);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_12
+  //                            553402.32229718589441
+  // /            -1844674407800451893.6
+  //   ------------------------------------------------
+  //                                -0.0000000000002999999999767169
+  //                                {{-296750463, 698491, 0, -2145648640}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{24, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -296750463);
+  ck_assert_int_eq(res.bits[1], 698491);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_13
+  //                            553402.32229718589441
+  // /                      1844674413.8134061057
+  //   ------------------------------------------------
+  //                                 0.0002999999989988282357740706
+  //                                 {{962032802, 1397282094, 162630, 1835008}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 15, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 962032802);
+  ck_assert_int_eq(res.bits[1], 1397282094);
+  ck_assert_int_eq(res.bits[2], 162630);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_14
+  //                            553402.32229718589441
+  // /            -1844674407800451891.3
+  //   ------------------------------------------------
+  //                                -0.0000000000002999999999767169
+  //                                {{-296750463, 698491, 0, -2145648640}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -296750463);
+  ck_assert_int_eq(res.bits[1], 698491);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_15
+  //                            553402.32229718589441
+  // /                               0.0000000001
+  //   ------------------------------------------------
+  //                  5534023222971858.9441
+  //                  {{1, 2, 3, 262144}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 0, 0, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 2);
+  ck_assert_int_eq(res.bits[2], 3);
+  ck_assert_int_eq(res.bits[3], 262144);
+
+#test div_16
+  //                            553402.32229718589441
+  // /                              -0.0000000001
+  //   ------------------------------------------------
+  //                 -5534023222971858.9441
+  //                 {{1, 2, 3, -2147221504}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 0, 0, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 2);
+  ck_assert_int_eq(res.bits[2], 3);
+  ck_assert_int_eq(res.bits[3], -2147221504);
+
+#test div_17
+  //                            553402.32229718589441
+  // /                          184467.44073709551617
+  //   ------------------------------------------------
+  //                                 3.0000000004656612871993190405
+  //                                 {{1806329861, -82926625, 1626303258, 1835008}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 0, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1806329861);
+  ck_assert_int_eq(res.bits[1], -82926625);
+  ck_assert_int_eq(res.bits[2], 1626303258);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_18
+  //                            553402.32229718589441
+  // /                           18446.744078004518913
+  //   ------------------------------------------------
+  //                                29.999999997671693562919202625
+  //                                {{-779407551, -1709229884, 1626303258, 1769472}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 1, 1, 983040}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -779407551);
+  ck_assert_int_eq(res.bits[1], -1709229884);
+  ck_assert_int_eq(res.bits[2], 1626303258);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_19
+  //                            553402.32229718589441
+  // /                          -18446.744116659224577
+  //   ------------------------------------------------
+  //                               -29.999999934807419927620605534
+  //                               {{2057164382, 833910007, 1626303255, -2145714176}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 10, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 2057164382);
+  ck_assert_int_eq(res.bits[1], 833910007);
+  ck_assert_int_eq(res.bits[2], 1626303255);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_20
+  //                            553402.32229718589441
+  // /                          -18446.744078004518913
+  //   ------------------------------------------------
+  //                               -29.999999997671693562919202625
+  //                               {{-779407551, -1709229884, 1626303258, -2145714176}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 1, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -779407551);
+  ck_assert_int_eq(res.bits[1], -1709229884);
+  ck_assert_int_eq(res.bits[2], 1626303258);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_21
+  //                            553402.32229718589441
+  // /                     -1844674407.8004518913
+  //   ------------------------------------------------
+  //                                -0.000299999999976716935629192
+  //                                {{-524809848, 139955891, 16263, -2145714176}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 1, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -524809848);
+  ck_assert_int_eq(res.bits[1], 139955891);
+  ck_assert_int_eq(res.bits[2], 16263);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_22
+  //                            553402.32229718589441
+  // /            -5534023222971858944.1
+  //   ------------------------------------------------
+  //                                -0.0000000000001
+  //                                {{1, 0, 0, -2146631680}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 2, 3, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2146631680);
+
+#test div_23
+  //                            553402.32229718589441
+  // /                     -1844674408.2299486211
+  //   ------------------------------------------------
+  //                                -0.0002999999999068677425384521
+  //                                {{1942277193, 1399396288, 162630, -2145648640}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{3, 2, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1942277193);
+  ck_assert_int_eq(res.bits[1], 1399396288);
+  ck_assert_int_eq(res.bits[2], 162630);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_24
+  //                            553402.32229718589441
+  // /                      5534023222.9718589441
+  //   ------------------------------------------------
+  //                                 0.0001
+  //                                 {{1, 0, 0, 262144}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 2, 3, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 262144);
+
+#test div_25
+  //                            553402.32229718589441
+  // /                     -5534023222.9718589441
+  //   ------------------------------------------------
+  //                                -0.0001
+  //                                {{1, 0, 0, -2147221504}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1, 2, 3, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147221504);
+
+#test div_26
+  //                            553402.32229718589441
+  // /                   -184467440822.99486211
+  //   ------------------------------------------------
+  //                                -0.0000029999999990686774253845
+  //                                {{-1354966763, 1302484151, 1626, -2145648640}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{3, 2, 1, -2146959360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1354966763);
+  ck_assert_int_eq(res.bits[1], 1302484151);
+  ck_assert_int_eq(res.bits[2], 1626);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_27
+  //                            553402.32229718589441
+  // /                         -553402.32229718589450
+  //   ------------------------------------------------
+  //                                -0.9999999999999999998373696742
+  //                                {{-1357867802, 1042612832, 542101086, -2145648640}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{10, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1357867802);
+  ck_assert_int_eq(res.bits[1], 1042612832);
+  ck_assert_int_eq(res.bits[2], 542101086);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_28
+  //                            553402.32229718589441
+  // /                    184467440822.99486211
+  //   ------------------------------------------------
+  //                                 0.0000029999999990686774253845
+  //                                 {{-1354966763, 1302484151, 1626, 1835008}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{3, 2, 1, 524288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1354966763);
+  ck_assert_int_eq(res.bits[1], 1302484151);
+  ck_assert_int_eq(res.bits[2], 1626);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_29
+  //                            553402.32229718589441
+  // /                              10
+  //   ------------------------------------------------
+  //                             55340.232229718589441
+  //                             {{1, 2, 3, 983040}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{10, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 2);
+  ck_assert_int_eq(res.bits[2], 3);
+  ck_assert_int_eq(res.bits[3], 983040);
+
+#test div_30
+  //                            553402.32229718589441
+  // /                      -133456435
+  //   ------------------------------------------------
+  //                                -0.0041466889348361950055836573
+  //                                {{1624976285, -1821557897, 2247924, -2145648640}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{133456435, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1624976285);
+  ck_assert_int_eq(res.bits[1], -1821557897);
+  ck_assert_int_eq(res.bits[2], 2247924);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_31
+  //                            553402.32229718589441
+  // /                              -0.2343453
+  //   ------------------------------------------------
+  //                          -2361482.4888623151153874218941
+  //                          {{1944858557, 1526856742, 1280162222, -2146041856}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{2343453, 0, 0, -2147024896}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1944858557);
+  ck_assert_int_eq(res.bits[1], 1526856742);
+  ck_assert_int_eq(res.bits[2], 1280162222);
+  ck_assert_int_eq(res.bits[3], -2146041856);
+
+#test div_32
+  //                            553402.32229718589441
+  // /                             127.2343
+  //   ------------------------------------------------
+  //                              4349.4743343358347113160523538
+  //                              {{294928146, 981089171, -1937112535, 1638400}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{1272343, 0, 0, 262144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 294928146);
+  ck_assert_int_eq(res.bits[1], 981089171);
+  ck_assert_int_eq(res.bits[2], -1937112535);
+  ck_assert_int_eq(res.bits[3], 1638400);
+
+#test div_33
+  //                            553402.32229718589441
+  // /                     -2147483648
+  //   ------------------------------------------------
+  //                                -0.0002576980378000000000046566
+  //                                {{1105835494, 1658776524, 139698, -2145648640}};
+
+  es_decimal one = {{1, 2, 3, 917504}};
+  es_decimal two = {{-2147483648, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1105835494);
+  ck_assert_int_eq(res.bits[1], 1658776524);
+  ck_assert_int_eq(res.bits[2], 139698);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_34
+  //                           -553402.32229718589441
+  // /                          553402.32229718589441
+  //   ------------------------------------------------
+  //                                -1
+  //                                {{1, 0, 0, -2147483648}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 2, 3, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test div_35
+  //                           -553402.32229718589441
+  // /                         -553402.32229718589441
+  //   ------------------------------------------------
+  //                                 1
+  //                                 {{1, 0, 0, 0}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_36
+  //                           -553402.32229718589441
+  // /                             -55.340232221137244782625
+  //   ------------------------------------------------
+  //                             10000.000001550652086909268286
+  //                             {{-1972244162, 1403652156, 542101086, 1572864}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{33, 2, 3000, -2146107392}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1972244162);
+  ck_assert_int_eq(res.bits[1], 1403652156);
+  ck_assert_int_eq(res.bits[2], 542101086);
+  ck_assert_int_eq(res.bits[3], 1572864);
+
+#test div_37
+  //                           -553402.32229718589441
+  // /                               0.055340232650625384458
+  //   ------------------------------------------------
+  //                          -9999999.923941990328397462875
+  //                          {{820510043, 513846670, 542101082, -2146107392}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{10, 100, 3, 1376256}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 820510043);
+  ck_assert_int_eq(res.bits[1], 513846670);
+  ck_assert_int_eq(res.bits[2], 542101082);
+  ck_assert_int_eq(res.bits[3], -2146107392);
+
+#test div_38
+  //                           -553402.32229718589441
+  // /                         5534023.2650625384464
+  //   ------------------------------------------------
+  //                                -0.0999999992394199032731326072
+  //                                {{832624248, 910378126, 54210108, -2145648640}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{16, 100, 3, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 832624248);
+  ck_assert_int_eq(res.bits[1], 910378126);
+  ck_assert_int_eq(res.bits[2], 54210108);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_39
+  //                           -553402.32229718589441
+  // /                             -63.31900243533454217608892
+  //   ------------------------------------------------
+  //                              8739.909048035873817509722072
+  //                              {{-381192232, -599961551, 473791418, 1572864}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{32444, 100, 343253, -2145976320}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -381192232);
+  ck_assert_int_eq(res.bits[1], -599961551);
+  ck_assert_int_eq(res.bits[2], 473791418);
+  ck_assert_int_eq(res.bits[3], 1572864);
+
+#test div_40
+  //                           -553402.32229718589441
+  // /                          184467.44078004518913
+  //   ------------------------------------------------
+  //                                -2.9999999997671693562919202625
+  //                                {{-779407551, -1709229884, 1626303258, -2145648640}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 1, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -779407551);
+  ck_assert_int_eq(res.bits[1], -1709229884);
+  ck_assert_int_eq(res.bits[2], 1626303258);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_41
+  //                           -553402.32229718589441
+  // /                               0.0000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{0, 0, 0, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_42
+  //                           -553402.32229718589441
+  // /                               0.00000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{0, 0, 0, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_43
+  //                           -553402.32229718589441
+  // /             1844674407800451891.3
+  //   ------------------------------------------------
+  //                                -0.0000000000002999999999767169
+  //                                {{-296750463, 698491, 0, -2145648640}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 1, 1, 65536}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -296750463);
+  ck_assert_int_eq(res.bits[1], 698491);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_44
+  //                           -553402.32229718589441
+  // /                      1844674407.8004518913
+  //   ------------------------------------------------
+  //                                -0.000299999999976716935629192
+  //                                {{-524809848, 139955891, 16263, -2145714176}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 1, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -524809848);
+  ck_assert_int_eq(res.bits[1], 139955891);
+  ck_assert_int_eq(res.bits[2], 16263);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_45
+  //                           -553402.32229718589441
+  // /            -1844674407800451893.6
+  //   ------------------------------------------------
+  //                                 0.0000000000002999999999767169
+  //                                 {{-296750463, 698491, 0, 1835008}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{24, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -296750463);
+  ck_assert_int_eq(res.bits[1], 698491);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_46
+  //                           -553402.32229718589441
+  // /                      1844674413.8134061057
+  //   ------------------------------------------------
+  //                                -0.0002999999989988282357740706
+  //                                {{962032802, 1397282094, 162630, -2145648640}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 15, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 962032802);
+  ck_assert_int_eq(res.bits[1], 1397282094);
+  ck_assert_int_eq(res.bits[2], 162630);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_47
+  //                           -553402.32229718589441
+  // /            -1844674407800451891.3
+  //   ------------------------------------------------
+  //                                 0.0000000000002999999999767169
+  //                                 {{-296750463, 698491, 0, 1835008}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -296750463);
+  ck_assert_int_eq(res.bits[1], 698491);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_48
+  //                           -553402.32229718589441
+  // /                               0.0000000001
+  //   ------------------------------------------------
+  //                 -5534023222971858.9441
+  //                 {{1, 2, 3, -2147221504}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 0, 0, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 2);
+  ck_assert_int_eq(res.bits[2], 3);
+  ck_assert_int_eq(res.bits[3], -2147221504);
+
+#test div_49
+  //                           -553402.32229718589441
+  // /                              -0.0000000001
+  //   ------------------------------------------------
+  //                  5534023222971858.9441
+  //                  {{1, 2, 3, 262144}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 0, 0, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 2);
+  ck_assert_int_eq(res.bits[2], 3);
+  ck_assert_int_eq(res.bits[3], 262144);
+
+#test div_50
+  //                           -553402.32229718589441
+  // /                          184467.44073709551617
+  //   ------------------------------------------------
+  //                                -3.0000000004656612871993190405
+  //                                {{1806329861, -82926625, 1626303258, -2145648640}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 0, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1806329861);
+  ck_assert_int_eq(res.bits[1], -82926625);
+  ck_assert_int_eq(res.bits[2], 1626303258);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_51
+  //                           -553402.32229718589441
+  // /                           18446.744078004518913
+  //   ------------------------------------------------
+  //                               -29.999999997671693562919202625
+  //                               {{-779407551, -1709229884, 1626303258, -2145714176}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 1, 1, 983040}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -779407551);
+  ck_assert_int_eq(res.bits[1], -1709229884);
+  ck_assert_int_eq(res.bits[2], 1626303258);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_52
+  //                           -553402.32229718589441
+  // /                          -18446.744116659224577
+  //   ------------------------------------------------
+  //                                29.999999934807419927620605534
+  //                                {{2057164382, 833910007, 1626303255, 1769472}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 10, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 2057164382);
+  ck_assert_int_eq(res.bits[1], 833910007);
+  ck_assert_int_eq(res.bits[2], 1626303255);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_53
+  //                           -553402.32229718589441
+  // /                          -18446.744078004518913
+  //   ------------------------------------------------
+  //                                29.999999997671693562919202625
+  //                                {{-779407551, -1709229884, 1626303258, 1769472}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 1, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -779407551);
+  ck_assert_int_eq(res.bits[1], -1709229884);
+  ck_assert_int_eq(res.bits[2], 1626303258);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_54
+  //                           -553402.32229718589441
+  // /                     -1844674407.8004518913
+  //   ------------------------------------------------
+  //                                 0.000299999999976716935629192
+  //                                 {{-524809848, 139955891, 16263, 1769472}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 1, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -524809848);
+  ck_assert_int_eq(res.bits[1], 139955891);
+  ck_assert_int_eq(res.bits[2], 16263);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_55
+  //                           -553402.32229718589441
+  // /            -5534023222971858944.1
+  //   ------------------------------------------------
+  //                                 0.0000000000001
+  //                                 {{1, 0, 0, 851968}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 2, 3, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 851968);
+
+#test div_56
+  //                           -553402.32229718589441
+  // /                     -1844674408.2299486211
+  //   ------------------------------------------------
+  //                                 0.0002999999999068677425384521
+  //                                 {{1942277193, 1399396288, 162630, 1835008}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{3, 2, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1942277193);
+  ck_assert_int_eq(res.bits[1], 1399396288);
+  ck_assert_int_eq(res.bits[2], 162630);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_57
+  //                           -553402.32229718589441
+  // /                      5534023222.9718589441
+  //   ------------------------------------------------
+  //                                -0.0001
+  //                                {{1, 0, 0, -2147221504}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 2, 3, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147221504);
+
+#test div_58
+  //                           -553402.32229718589441
+  // /                     -5534023222.9718589441
+  //   ------------------------------------------------
+  //                                 0.0001
+  //                                 {{1, 0, 0, 262144}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1, 2, 3, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 262144);
+
+#test div_59
+  //                           -553402.32229718589441
+  // /                   -184467440822.99486211
+  //   ------------------------------------------------
+  //                                 0.0000029999999990686774253845
+  //                                 {{-1354966763, 1302484151, 1626, 1835008}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{3, 2, 1, -2146959360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1354966763);
+  ck_assert_int_eq(res.bits[1], 1302484151);
+  ck_assert_int_eq(res.bits[2], 1626);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_60
+  //                           -553402.32229718589441
+  // /                         -553402.32229718589450
+  //   ------------------------------------------------
+  //                                 0.9999999999999999998373696742
+  //                                 {{-1357867802, 1042612832, 542101086, 1835008}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{10, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1357867802);
+  ck_assert_int_eq(res.bits[1], 1042612832);
+  ck_assert_int_eq(res.bits[2], 542101086);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_61
+  //                           -553402.32229718589441
+  // /                    184467440822.99486211
+  //   ------------------------------------------------
+  //                                -0.0000029999999990686774253845
+  //                                {{-1354966763, 1302484151, 1626, -2145648640}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{3, 2, 1, 524288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1354966763);
+  ck_assert_int_eq(res.bits[1], 1302484151);
+  ck_assert_int_eq(res.bits[2], 1626);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_62
+  //                           -553402.32229718589441
+  // /                              10
+  //   ------------------------------------------------
+  //                            -55340.232229718589441
+  //                            {{1, 2, 3, -2146500608}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{10, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 2);
+  ck_assert_int_eq(res.bits[2], 3);
+  ck_assert_int_eq(res.bits[3], -2146500608);
+
+#test div_63
+  //                           -553402.32229718589441
+  // /                      -133456435
+  //   ------------------------------------------------
+  //                                 0.0041466889348361950055836573
+  //                                 {{1624976285, -1821557897, 2247924, 1835008}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{133456435, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1624976285);
+  ck_assert_int_eq(res.bits[1], -1821557897);
+  ck_assert_int_eq(res.bits[2], 2247924);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_64
+  //                           -553402.32229718589441
+  // /                              -0.2343453
+  //   ------------------------------------------------
+  //                           2361482.4888623151153874218941
+  //                           {{1944858557, 1526856742, 1280162222, 1441792}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{2343453, 0, 0, -2147024896}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1944858557);
+  ck_assert_int_eq(res.bits[1], 1526856742);
+  ck_assert_int_eq(res.bits[2], 1280162222);
+  ck_assert_int_eq(res.bits[3], 1441792);
+
+#test div_65
+  //                           -553402.32229718589441
+  // /                             127.2343
+  //   ------------------------------------------------
+  //                             -4349.4743343358347113160523538
+  //                             {{294928146, 981089171, -1937112535, -2145845248}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{1272343, 0, 0, 262144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 294928146);
+  ck_assert_int_eq(res.bits[1], 981089171);
+  ck_assert_int_eq(res.bits[2], -1937112535);
+  ck_assert_int_eq(res.bits[3], -2145845248);
+
+#test div_66
+  //                           -553402.32229718589441
+  // /                     -2147483648
+  //   ------------------------------------------------
+  //                                 0.0002576980378000000000046566
+  //                                 {{1105835494, 1658776524, 139698, 1835008}};
+
+  es_decimal one = {{1, 2, 3, -2146566144}};
+  es_decimal two = {{-2147483648, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1105835494);
+  ck_assert_int_eq(res.bits[1], 1658776524);
+  ck_assert_int_eq(res.bits[2], 139698);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_67
+  //                               -55.340232221137244782625
+  // /                          553402.32229718589441
+  //   ------------------------------------------------
+  //                                -0.0000999999999844934791333118
+  //                                {{-1303247618, 466501605, 54210, -2145648640}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 2, 3, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1303247618);
+  ck_assert_int_eq(res.bits[1], 466501605);
+  ck_assert_int_eq(res.bits[2], 54210);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_68
+  //                               -55.340232221137244782625
+  // /                         -553402.32229718589441
+  //   ------------------------------------------------
+  //                                 0.0000999999999844934791333118
+  //                                 {{-1303247618, 466501605, 54210, 1835008}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1303247618);
+  ck_assert_int_eq(res.bits[1], 466501605);
+  ck_assert_int_eq(res.bits[2], 54210);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_69
+  //                               -55.340232221137244782625
+  // /                             -55.340232221137244782625
+  //   ------------------------------------------------
+  //                                 1
+  //                                 {{1, 0, 0, 0}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{33, 2, 3000, -2146107392}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_70
+  //                               -55.340232221137244782625
+  // /                               0.055340232650625384458
+  //   ------------------------------------------------
+  //                              -999.9999922391338253522597919
+  //                              {{-2084276193, 152807349, 542101082, -2145845248}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{10, 100, 3, 1376256}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -2084276193);
+  ck_assert_int_eq(res.bits[1], 152807349);
+  ck_assert_int_eq(res.bits[2], 542101082);
+  ck_assert_int_eq(res.bits[3], -2145845248);
+
+#test div_71
+  //                               -55.340232221137244782625
+  // /                         5534023.2650625384464
+  //   ------------------------------------------------
+  //                                -0.0000099999999223913382524384
+  //                                {{928626144, 46473074, 5421, -2145648640}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{16, 100, 3, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 928626144);
+  ck_assert_int_eq(res.bits[1], 46473074);
+  ck_assert_int_eq(res.bits[2], 5421);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_72
+  //                               -55.340232221137244782625
+  // /                             -63.31900243533454217608892
+  //   ------------------------------------------------
+  //                                 0.8739909046680617997246472693
+  //                                 {{-155901451, -915506636, 473791418, 1835008}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{32444, 100, 343253, -2145976320}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -155901451);
+  ck_assert_int_eq(res.bits[1], -915506636);
+  ck_assert_int_eq(res.bits[2], 473791418);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_73
+  //                               -55.340232221137244782625
+  // /                          184467.44078004518913
+  //   ------------------------------------------------
+  //                                -0.0002999999999301973730327379
+  //                                {{-81331373, 1399450606, 162630, -2145648640}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 1, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -81331373);
+  ck_assert_int_eq(res.bits[1], 1399450606);
+  ck_assert_int_eq(res.bits[2], 162630);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_74
+  //                               -55.340232221137244782625
+  // /                               0.0000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{0, 0, 0, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_75
+  //                               -55.340232221137244782625
+  // /                               0.00000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{0, 0, 0, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_76
+  //                               -55.340232221137244782625
+  // /             1844674407800451891.3
+  //   ------------------------------------------------
+  //                                -0.000000000000000029999999993
+  //                                {{-64771079, 6, 0, -2145714176}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 1, 1, 65536}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -64771079);
+  ck_assert_int_eq(res.bits[1], 6);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_77
+  //                               -55.340232221137244782625
+  // /                      1844674407.8004518913
+  //   ------------------------------------------------
+  //                                -0.0000000299999999930197373033
+  //                                {{-392138647, 1129716343, 16, -2145648640}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 1, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -392138647);
+  ck_assert_int_eq(res.bits[1], 1129716343);
+  ck_assert_int_eq(res.bits[2], 16);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_78
+  //                               -55.340232221137244782625
+  // /            -1844674407800451893.6
+  //   ------------------------------------------------
+  //                                 0.000000000000000029999999993
+  //                                 {{-64771079, 6, 0, 1769472}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{24, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -64771079);
+  ck_assert_int_eq(res.bits[1], 6);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_79
+  //                               -55.340232221137244782625
+  // /                      1844674413.8134061057
+  //   ------------------------------------------------
+  //                                -0.0000000299999998952308673329
+  //                                {{971705137, 1129716116, 16, -2145648640}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 15, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 971705137);
+  ck_assert_int_eq(res.bits[1], 1129716116);
+  ck_assert_int_eq(res.bits[2], 16);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_80
+  //                               -55.340232221137244782625
+  // /            -1844674407800451891.3
+  //   ------------------------------------------------
+  //                                 0.000000000000000029999999993
+  //                                 {{-64771079, 6, 0, 1769472}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -64771079);
+  ck_assert_int_eq(res.bits[1], 6);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_81
+  //                               -55.340232221137244782625
+  // /                               0.0000000001
+  //   ------------------------------------------------
+  //                     -553402322211.37244782625
+  //                     {{33, 2, 3000, -2146762752}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 0, 0, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 33);
+  ck_assert_int_eq(res.bits[1], 2);
+  ck_assert_int_eq(res.bits[2], 3000);
+  ck_assert_int_eq(res.bits[3], -2146762752);
+
+#test div_82
+  //                               -55.340232221137244782625
+  // /                              -0.0000000001
+  //   ------------------------------------------------
+  //                      553402322211.37244782625
+  //                      {{33, 2, 3000, 720896}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 0, 0, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 33);
+  ck_assert_int_eq(res.bits[1], 2);
+  ck_assert_int_eq(res.bits[2], 3000);
+  ck_assert_int_eq(res.bits[3], 720896);
+
+#test div_83
+  //                               -55.340232221137244782625
+  // /                          184467.44073709551617
+  //   ------------------------------------------------
+  //                                -0.0003000000000000465661126466
+  //                                {{1318119234, 1399613237, 162630, -2145648640}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 0, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1318119234);
+  ck_assert_int_eq(res.bits[1], 1399613237);
+  ck_assert_int_eq(res.bits[2], 162630);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_84
+  //                               -55.340232221137244782625
+  // /                           18446.744078004518913
+  //   ------------------------------------------------
+  //                                -0.0029999999993019737303273794
+  //                                {{-813313726, 1109604181, 1626303, -2145648640}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 1, 1, 983040}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -813313726);
+  ck_assert_int_eq(res.bits[1], 1109604181);
+  ck_assert_int_eq(res.bits[2], 1626303);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_85
+  //                               -55.340232221137244782625
+  // /                          -18446.744116659224577
+  //   ------------------------------------------------
+  //                                 0.0029999999930155463677723258
+  //                                 {{-2063449478, 1094967452, 1626303, 1835008}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 10, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -2063449478);
+  ck_assert_int_eq(res.bits[1], 1094967452);
+  ck_assert_int_eq(res.bits[2], 1626303);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_86
+  //                               -55.340232221137244782625
+  // /                          -18446.744078004518913
+  //   ------------------------------------------------
+  //                                 0.0029999999993019737303273794
+  //                                 {{-813313726, 1109604181, 1626303, 1835008}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 1, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -813313726);
+  ck_assert_int_eq(res.bits[1], 1109604181);
+  ck_assert_int_eq(res.bits[2], 1626303);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_87
+  //                               -55.340232221137244782625
+  // /                     -1844674407.8004518913
+  //   ------------------------------------------------
+  //                                 0.0000000299999999930197373033
+  //                                 {{-392138647, 1129716343, 16, 1835008}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 1, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -392138647);
+  ck_assert_int_eq(res.bits[1], 1129716343);
+  ck_assert_int_eq(res.bits[2], 16);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_88
+  //                               -55.340232221137244782625
+  // /            -5534023222971858944.1
+  //   ------------------------------------------------
+  //                                 0.0000000000000000099999999984
+  //                                 {{1215752176, 23, 0, 1835008}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 2, 3, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1215752176);
+  ck_assert_int_eq(res.bits[1], 23);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_89
+  //                               -55.340232221137244782625
+  // /                     -1844674408.2299486211
+  //   ------------------------------------------------
+  //                                 0.0000000299999999860348179953
+  //                                 {{-1521854991, 1129716327, 16, 1835008}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{3, 2, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1521854991);
+  ck_assert_int_eq(res.bits[1], 1129716327);
+  ck_assert_int_eq(res.bits[2], 16);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_90
+  //                               -55.340232221137244782625
+  // /                      5534023222.9718589441
+  //   ------------------------------------------------
+  //                                -0.0000000099999999984493479133
+  //                                {{-959626019, 1808227881, 5, -2145648640}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 2, 3, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -959626019);
+  ck_assert_int_eq(res.bits[1], 1808227881);
+  ck_assert_int_eq(res.bits[2], 5);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_91
+  //                               -55.340232221137244782625
+  // /                     -5534023222.9718589441
+  //   ------------------------------------------------
+  //                                 0.0000000099999999984493479133
+  //                                 {{-959626019, 1808227881, 5, 1835008}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1, 2, 3, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -959626019);
+  ck_assert_int_eq(res.bits[1], 1808227881);
+  ck_assert_int_eq(res.bits[2], 5);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_92
+  //                               -55.340232221137244782625
+  // /                   -184467440822.99486211
+  //   ------------------------------------------------
+  //                                 0.00000000029999999986034818
+  //                                 {{1315825794, 6984919, 0, 1703936}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{3, 2, 1, -2146959360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1315825794);
+  ck_assert_int_eq(res.bits[1], 6984919);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1703936);
+
+#test div_93
+  //                               -55.340232221137244782625
+  // /                         -553402.32229718589450
+  //   ------------------------------------------------
+  //                                 0.0000999999999844934791170488
+  //                                 {{-1303410248, 466501605, 54210, 1835008}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{10, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1303410248);
+  ck_assert_int_eq(res.bits[1], 466501605);
+  ck_assert_int_eq(res.bits[2], 54210);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_94
+  //                               -55.340232221137244782625
+  // /                    184467440822.99486211
+  //   ------------------------------------------------
+  //                                -0.00000000029999999986034818
+  //                                {{1315825794, 6984919, 0, -2145779712}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{3, 2, 1, 524288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1315825794);
+  ck_assert_int_eq(res.bits[1], 6984919);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145779712);
+
+#test div_95
+  //                               -55.340232221137244782625
+  // /                              10
+  //   ------------------------------------------------
+  //                                -5.5340232221137244782625
+  //                                {{33, 2, 3000, -2146041856}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{10, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 33);
+  ck_assert_int_eq(res.bits[1], 2);
+  ck_assert_int_eq(res.bits[2], 3000);
+  ck_assert_int_eq(res.bits[3], -2146041856);
+
+#test div_96
+  //                               -55.340232221137244782625
+  // /                      -133456435
+  //   ------------------------------------------------
+  //                                 0.0000004146688934193187820627
+  //                                 {{-1810066349, -891388020, 224, 1835008}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{133456435, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1810066349);
+  ck_assert_int_eq(res.bits[1], -891388020);
+  ck_assert_int_eq(res.bits[2], 224);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_97
+  //                               -55.340232221137244782625
+  // /                              -0.2343453
+  //   ------------------------------------------------
+  //                               236.14824884961313404888000741
+  //                               {{1719380197, 674268702, 1280162222, 1703936}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{2343453, 0, 0, -2147024896}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1719380197);
+  ck_assert_int_eq(res.bits[1], 674268702);
+  ck_assert_int_eq(res.bits[2], 1280162222);
+  ck_assert_int_eq(res.bits[3], 1703936);
+
+#test div_98
+  //                               -55.340232221137244782625
+  // /                             127.2343
+  //   ------------------------------------------------
+  //                                -0.4349474333661382566071020157
+  //                                {{-1650414979, 370572519, 235785476, -2145648640}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{1272343, 0, 0, 262144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1650414979);
+  ck_assert_int_eq(res.bits[1], 370572519);
+  ck_assert_int_eq(res.bits[2], 235785476);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_99
+  //                               -55.340232221137244782625
+  // /                     -2147483648
+  //   ------------------------------------------------
+  //                                 0.000000025769803776004
+  //                                 {{4, 6000, 0, 1376256}};
+
+  es_decimal one = {{33, 2, 3000, -2146107392}};
+  es_decimal two = {{-2147483648, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 4);
+  ck_assert_int_eq(res.bits[1], 6000);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1376256);
+
+#test div_100
+  //                                 0.055340232650625384458
+  // /                          553402.32229718589441
+  //   ------------------------------------------------
+  //                                 0.0000001000000007605801025008
+  //                                 {{-1145995792, 902411440, 54, 1835008}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 2, 3, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1145995792);
+  ck_assert_int_eq(res.bits[1], 902411440);
+  ck_assert_int_eq(res.bits[2], 54);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_101
+  //                                 0.055340232650625384458
+  // /                         -553402.32229718589441
+  //   ------------------------------------------------
+  //                                -0.0000001000000007605801025008
+  //                                {{-1145995792, 902411440, 54, -2145648640}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1145995792);
+  ck_assert_int_eq(res.bits[1], 902411440);
+  ck_assert_int_eq(res.bits[2], 54);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_102
+  //                                 0.055340232650625384458
+  // /                             -55.340232221137244782625
+  //   ------------------------------------------------
+  //                                -0.0010000000077608662348787845
+  //                                {{415953029, 388479475, 542101, -2145648640}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{33, 2, 3000, -2146107392}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 415953029);
+  ck_assert_int_eq(res.bits[1], 388479475);
+  ck_assert_int_eq(res.bits[2], 542101);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_103
+  //                                 0.055340232650625384458
+  // /                               0.055340232650625384458
+  //   ------------------------------------------------
+  //                                 1
+  //                                 {{1, 0, 0, 0}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{10, 100, 3, 1376256}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_104
+  //                                 0.055340232650625384458
+  // /                         5534023.2650625384464
+  //   ------------------------------------------------
+  //                                 0.0000000099999999999999999989
+  //                                 {{1661992949, 1808227885, 5, 1835008}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{16, 100, 3, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1661992949);
+  ck_assert_int_eq(res.bits[1], 1808227885);
+  ck_assert_int_eq(res.bits[2], 5);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_105
+  //                                 0.055340232650625384458
+  // /                             -63.31900243533454217608892
+  //   ------------------------------------------------
+  //                                -0.0008739909114509883013541707
+  //                                {{-767611061, 1814468521, 473791, -2145648640}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{32444, 100, 343253, -2145976320}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -767611061);
+  ck_assert_int_eq(res.bits[1], 1814468521);
+  ck_assert_int_eq(res.bits[2], 473791);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_106
+  //                                 0.055340232650625384458
+  // /                          184467.44078004518913
+  //   ------------------------------------------------
+  //                                 0.0000003000000022584572429546
+  //                                 {{-45431574, -1587733029, 162, 1835008}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 1, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -45431574);
+  ck_assert_int_eq(res.bits[1], -1587733029);
+  ck_assert_int_eq(res.bits[2], 162);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_107
+  //                                 0.055340232650625384458
+  // /                               0.0000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{0, 0, 0, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_108
+  //                                 0.055340232650625384458
+  // /                               0.00000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{0, 0, 0, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_109
+  //                                 0.055340232650625384458
+  // /             1844674407800451891.3
+  //   ------------------------------------------------
+  //                                 0.0000000000000000000300000002
+  //                                 {{300000002, 0, 0, 1835008}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 1, 1, 65536}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 300000002);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_110
+  //                                 0.055340232650625384458
+  // /                      1844674407.8004518913
+  //   ------------------------------------------------
+  //                                 0.0000000000300000002258457243
+  //                                 {{-1623502181, 69849193, 0, 1835008}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 1, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1623502181);
+  ck_assert_int_eq(res.bits[1], 69849193);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_111
+  //                                 0.055340232650625384458
+  // /            -1844674407800451893.6
+  //   ------------------------------------------------
+  //                                -0.0000000000000000000300000002
+  //                                {{300000002, 0, 0, -2145648640}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{24, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 300000002);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_112
+  //                                 0.055340232650625384458
+  // /                      1844674413.8134061057
+  //   ------------------------------------------------
+  //                                 0.0000000000300000001280568536
+  //                                 {{1693576408, 69849193, 0, 1835008}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 15, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1693576408);
+  ck_assert_int_eq(res.bits[1], 69849193);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_113
+  //                                 0.055340232650625384458
+  // /            -1844674407800451891.3
+  //   ------------------------------------------------
+  //                                -0.0000000000000000000300000002
+  //                                {{300000002, 0, 0, -2145648640}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 300000002);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_114
+  //                                 0.055340232650625384458
+  // /                               0.0000000001
+  //   ------------------------------------------------
+  //                         553402326.50625384458
+  //                         {{10, 100, 3, 720896}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 0, 0, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 10);
+  ck_assert_int_eq(res.bits[1], 100);
+  ck_assert_int_eq(res.bits[2], 3);
+  ck_assert_int_eq(res.bits[3], 720896);
+
+#test div_115
+  //                                 0.055340232650625384458
+  // /                              -0.0000000001
+  //   ------------------------------------------------
+  //                        -553402326.50625384458
+  //                        {{10, 100, 3, -2146762752}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 0, 0, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 10);
+  ck_assert_int_eq(res.bits[1], 100);
+  ck_assert_int_eq(res.bits[2], 3);
+  ck_assert_int_eq(res.bits[3], -2146762752);
+
+#test div_116
+  //                                 0.055340232650625384458
+  // /                          184467.44073709551617
+  //   ------------------------------------------------
+  //                                 0.0000003000000023283064365766
+  //                                 {{-1633164602, -1587732866, 162, 1835008}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 0, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1633164602);
+  ck_assert_int_eq(res.bits[1], -1587732866);
+  ck_assert_int_eq(res.bits[2], 162);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_117
+  //                                 0.055340232650625384458
+  // /                           18446.744078004518913
+  //   ------------------------------------------------
+  //                                 0.0000030000000225845724295464
+  //                                 {{-454315736, 1302538903, 1626, 1835008}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 1, 1, 983040}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -454315736);
+  ck_assert_int_eq(res.bits[1], 1302538903);
+  ck_assert_int_eq(res.bits[2], 1626);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_118
+  //                                 0.055340232650625384458
+  // /                          -18446.744116659224577
+  //   ------------------------------------------------
+  //                                -0.0000030000000162981450182033
+  //                                {{707882385, 1302524267, 1626, -2145648640}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 10, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 707882385);
+  ck_assert_int_eq(res.bits[1], 1302524267);
+  ck_assert_int_eq(res.bits[2], 1626);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_119
+  //                                 0.055340232650625384458
+  // /                          -18446.744078004518913
+  //   ------------------------------------------------
+  //                                -0.0000030000000225845724295464
+  //                                {{-454315736, 1302538903, 1626, -2145648640}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 1, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -454315736);
+  ck_assert_int_eq(res.bits[1], 1302538903);
+  ck_assert_int_eq(res.bits[2], 1626);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_120
+  //                                 0.055340232650625384458
+  // /                     -1844674407.8004518913
+  //   ------------------------------------------------
+  //                                -0.0000000000300000002258457243
+  //                                {{-1623502181, 69849193, 0, -2145648640}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 1, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1623502181);
+  ck_assert_int_eq(res.bits[1], 69849193);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_121
+  //                                 0.055340232650625384458
+  // /            -5534023222971858944.1
+  //   ------------------------------------------------
+  //                                -0.0000000000000000000100000001
+  //                                {{100000001, 0, 0, -2145648640}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 2, 3, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 100000001);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_122
+  //                                 0.055340232650625384458
+  // /                     -1844674408.2299486211
+  //   ------------------------------------------------
+  //                                -0.0000000000300000002188608049
+  //                                {{-1693351375, 69849193, 0, -2145648640}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{3, 2, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1693351375);
+  ck_assert_int_eq(res.bits[1], 69849193);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_123
+  //                                 0.055340232650625384458
+  // /                      5534023222.9718589441
+  //   ------------------------------------------------
+  //                                 0.0000000000100000000760580103
+  //                                 {{-1965062137, 23283064, 0, 1835008}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 2, 3, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1965062137);
+  ck_assert_int_eq(res.bits[1], 23283064);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_124
+  //                                 0.055340232650625384458
+  // /                     -5534023222.9718589441
+  //   ------------------------------------------------
+  //                                -0.0000000000100000000760580103
+  //                                {{-1965062137, 23283064, 0, -2145648640}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1, 2, 3, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1965062137);
+  ck_assert_int_eq(res.bits[1], 23283064);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_125
+  //                                 0.055340232650625384458
+  // /                   -184467440822.99486211
+  //   ------------------------------------------------
+  //                                -0.000000000000300000002188608
+  //                                {{831530304, 69849, 0, -2145714176}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{3, 2, 1, -2146959360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 831530304);
+  ck_assert_int_eq(res.bits[1], 69849);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_126
+  //                                 0.055340232650625384458
+  // /                         -553402.32229718589450
+  //   ------------------------------------------------
+  //                                -0.0000001000000007605801024846
+  //                                {{-1145995954, 902411440, 54, -2145648640}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{10, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1145995954);
+  ck_assert_int_eq(res.bits[1], 902411440);
+  ck_assert_int_eq(res.bits[2], 54);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_127
+  //                                 0.055340232650625384458
+  // /                    184467440822.99486211
+  //   ------------------------------------------------
+  //                                 0.000000000000300000002188608
+  //                                 {{831530304, 69849, 0, 1769472}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{3, 2, 1, 524288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 831530304);
+  ck_assert_int_eq(res.bits[1], 69849);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_128
+  //                                 0.055340232650625384458
+  // /                              10
+  //   ------------------------------------------------
+  //                                 0.0055340232650625384458
+  //                                 {{10, 100, 3, 1441792}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{10, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 10);
+  ck_assert_int_eq(res.bits[1], 100);
+  ck_assert_int_eq(res.bits[2], 3);
+  ck_assert_int_eq(res.bits[3], 1441792);
+
+#test div_129
+  //                                 0.055340232650625384458
+  // /                      -133456435
+  //   ------------------------------------------------
+  //                                -0.0000000004146688966375085957
+  //                                {{315725701, 965476261, 0, -2145648640}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{133456435, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 315725701);
+  ck_assert_int_eq(res.bits[1], 965476261);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_130
+  //                                 0.055340232650625384458
+  // /                              -0.2343453
+  //   ------------------------------------------------
+  //                                -0.2361482506823281049715953339
+  //                                {{-1802940741, 898575096, 128016223, -2145648640}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{2343453, 0, 0, -2147024896}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1802940741);
+  ck_assert_int_eq(res.bits[1], 898575096);
+  ck_assert_int_eq(res.bits[2], 128016223);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_131
+  //                                 0.055340232650625384458
+  // /                             127.2343
+  //   ------------------------------------------------
+  //                                 0.0004349474367417071061655544
+  //                                 {{408117240, 2052634364, 235785, 1835008}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{1272343, 0, 0, 262144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 408117240);
+  ck_assert_int_eq(res.bits[1], 2052634364);
+  ck_assert_int_eq(res.bits[2], 235785);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_132
+  //                                 0.055340232650625384458
+  // /                     -2147483648
+  //   ------------------------------------------------
+  //                                -0.000000000025769803976
+  //                                {{200, 6, 0, -2146107392}};
+
+  es_decimal one = {{10, 100, 3, 1376256}};
+  es_decimal two = {{-2147483648, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 200);
+  ck_assert_int_eq(res.bits[1], 6);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2146107392);
+
+#test div_133
+  //                           5534023.2650625384464
+  // /                          553402.32229718589441
+  //   ------------------------------------------------
+  //                                10.000000076058010251168827218
+  //                                {{-537933998, 1571379130, 542101090, 1769472}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 2, 3, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -537933998);
+  ck_assert_int_eq(res.bits[1], 1571379130);
+  ck_assert_int_eq(res.bits[2], 542101090);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_134
+  //                           5534023.2650625384464
+  // /                         -553402.32229718589441
+  //   ------------------------------------------------
+  //                               -10.000000076058010251168827218
+  //                               {{-537933998, 1571379130, 542101090, -2145714176}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -537933998);
+  ck_assert_int_eq(res.bits[1], 1571379130);
+  ck_assert_int_eq(res.bits[2], 542101090);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_135
+  //                           5534023.2650625384464
+  // /                             -55.340232221137244782625
+  //   ------------------------------------------------
+  //                           -100000.00077608662349872046736
+  //                           {{425403024, 1932418457, 542101090, -2145976320}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{33, 2, 3000, -2146107392}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 425403024);
+  ck_assert_int_eq(res.bits[1], 1932418457);
+  ck_assert_int_eq(res.bits[2], 542101090);
+  ck_assert_int_eq(res.bits[3], -2145976320);
+
+#test div_136
+  //                           5534023.2650625384464
+  // /                               0.055340232650625384458
+  //   ------------------------------------------------
+  //                         100000000.00000000001084202164
+  //                         {{1352637620, 1042612833, 542101086, 1310720}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{10, 100, 3, 1376256}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1352637620);
+  ck_assert_int_eq(res.bits[1], 1042612833);
+  ck_assert_int_eq(res.bits[2], 542101086);
+  ck_assert_int_eq(res.bits[3], 1310720);
+
+#test div_137
+  //                           5534023.2650625384464
+  // /                         5534023.2650625384464
+  //   ------------------------------------------------
+  //                                 1
+  //                                 {{1, 0, 0, 0}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{16, 100, 3, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_138
+  //                           5534023.2650625384464
+  // /                             -63.31900243533454217608892
+  //   ------------------------------------------------
+  //                            -87399.09114509883014489289748
+  //                            {{2135667732, 1992322909, 473791422, -2145976320}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{32444, 100, 343253, -2145976320}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 2135667732);
+  ck_assert_int_eq(res.bits[1], 1992322909);
+  ck_assert_int_eq(res.bits[2], 473791422);
+  ck_assert_int_eq(res.bits[3], -2145976320);
+
+#test div_139
+  //                           5534023.2650625384464
+  // /                          184467.44078004518913
+  //   ------------------------------------------------
+  //                                30.000000225845724298717048793
+  //                                {{567685081, -122930994, 1626303270, 1769472}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 1, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 567685081);
+  ck_assert_int_eq(res.bits[1], -122930994);
+  ck_assert_int_eq(res.bits[2], 1626303270);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_140
+  //                           5534023.2650625384464
+  // /                               0.0000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{0, 0, 0, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_141
+  //                           5534023.2650625384464
+  // /                               0.00000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{0, 0, 0, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_142
+  //                           5534023.2650625384464
+  // /             1844674407800451891.3
+  //   ------------------------------------------------
+  //                                 0.0000000000030000000225845724
+  //                                 {{1555636700, 6984919, 0, 1835008}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 1, 1, 65536}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1555636700);
+  ck_assert_int_eq(res.bits[1], 6984919);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_143
+  //                           5534023.2650625384464
+  // /                      1844674407.8004518913
+  //   ------------------------------------------------
+  //                                 0.0030000000225845724298717049
+  //                                 {{954050425, 1163813206, 1626303, 1835008}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 1, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 954050425);
+  ck_assert_int_eq(res.bits[1], 1163813206);
+  ck_assert_int_eq(res.bits[2], 1626303);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_144
+  //                           5534023.2650625384464
+  // /            -1844674407800451893.6
+  //   ------------------------------------------------
+  //                                -0.0000000000030000000225845724
+  //                                {{1555636700, 6984919, 0, -2145648640}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{24, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1555636700);
+  ck_assert_int_eq(res.bits[1], 6984919);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_145
+  //                           5534023.2650625384464
+  // /                      1844674413.8134061057
+  //   ------------------------------------------------
+  //                                 0.0030000000128056853569442215
+  //                                 {{-2112908889, 1141044960, 1626303, 1835008}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 15, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -2112908889);
+  ck_assert_int_eq(res.bits[1], 1141044960);
+  ck_assert_int_eq(res.bits[2], 1626303);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_146
+  //                           5534023.2650625384464
+  // /            -1844674407800451891.3
+  //   ------------------------------------------------
+  //                                -0.0000000000030000000225845724
+  //                                {{1555636700, 6984919, 0, -2145648640}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1555636700);
+  ck_assert_int_eq(res.bits[1], 6984919);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_147
+  //                           5534023.2650625384464
+  // /                               0.0000000001
+  //   ------------------------------------------------
+  //                 55340232650625384.464
+  //                 {{16, 100, 3, 196608}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 0, 0, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 16);
+  ck_assert_int_eq(res.bits[1], 100);
+  ck_assert_int_eq(res.bits[2], 3);
+  ck_assert_int_eq(res.bits[3], 196608);
+
+#test div_148
+  //                           5534023.2650625384464
+  // /                              -0.0000000001
+  //   ------------------------------------------------
+  //                -55340232650625384.464
+  //                {{16, 100, 3, -2147287040}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 0, 0, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 16);
+  ck_assert_int_eq(res.bits[1], 100);
+  ck_assert_int_eq(res.bits[2], 3);
+  ck_assert_int_eq(res.bits[3], -2147287040);
+
+#test div_149
+  //                           5534023.2650625384464
+  // /                          184467.44073709551617
+  //   ------------------------------------------------
+  //                                30.000000232830643660916943015
+  //                                {{444754087, 1503372277, 1626303271, 1769472}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 0, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 444754087);
+  ck_assert_int_eq(res.bits[1], 1503372277);
+  ck_assert_int_eq(res.bits[2], 1626303271);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_150
+  //                           5534023.2650625384464
+  // /                           18446.744078004518913
+  //   ------------------------------------------------
+  //                               300.00000225845724298717048793
+  //                               {{567685081, -122930994, 1626303270, 1703936}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 1, 1, 983040}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 567685081);
+  ck_assert_int_eq(res.bits[1], -122930994);
+  ck_assert_int_eq(res.bits[2], 1626303270);
+  ck_assert_int_eq(res.bits[3], 1703936);
+
+#test div_151
+  //                           5534023.2650625384464
+  // /                          -18446.744116659224577
+  //   ------------------------------------------------
+  //                              -300.00000162981450185285294844
+  //                              {{2012470012, -1874758511, 1626303267, -2145779712}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 10, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 2012470012);
+  ck_assert_int_eq(res.bits[1], -1874758511);
+  ck_assert_int_eq(res.bits[2], 1626303267);
+  ck_assert_int_eq(res.bits[3], -2145779712);
+
+#test div_152
+  //                           5534023.2650625384464
+  // /                          -18446.744078004518913
+  //   ------------------------------------------------
+  //                              -300.00000225845724298717048793
+  //                              {{567685081, -122930994, 1626303270, -2145779712}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 1, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 567685081);
+  ck_assert_int_eq(res.bits[1], -122930994);
+  ck_assert_int_eq(res.bits[2], 1626303270);
+  ck_assert_int_eq(res.bits[3], -2145779712);
+
+#test div_153
+  //                           5534023.2650625384464
+  // /                     -1844674407.8004518913
+  //   ------------------------------------------------
+  //                                -0.0030000000225845724298717049
+  //                                {{954050425, 1163813206, 1626303, -2145648640}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 1, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 954050425);
+  ck_assert_int_eq(res.bits[1], 1163813206);
+  ck_assert_int_eq(res.bits[2], 1626303);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_154
+  //                           5534023.2650625384464
+  // /            -5534023222971858944.1
+  //   ------------------------------------------------
+  //                                -0.000000000001000000007605801
+  //                                {{-1522889175, 232830, 0, -2145714176}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 2, 3, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1522889175);
+  ck_assert_int_eq(res.bits[1], 232830);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_155
+  //                           5534023.2650625384464
+  // /                     -1844674408.2299486211
+  //   ------------------------------------------------
+  //                                -0.0030000000218860804936517155
+  //                                {{-209762781, 1162186902, 1626303, -2145648640}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{3, 2, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -209762781);
+  ck_assert_int_eq(res.bits[1], 1162186902);
+  ck_assert_int_eq(res.bits[2], 1626303);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_156
+  //                           5534023.2650625384464
+  // /                      5534023222.9718589441
+  //   ------------------------------------------------
+  //                                 0.0010000000076058010251168827
+  //                                 {{-984085445, 388118435, 542101, 1835008}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 2, 3, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -984085445);
+  ck_assert_int_eq(res.bits[1], 388118435);
+  ck_assert_int_eq(res.bits[2], 542101);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_157
+  //                           5534023.2650625384464
+  // /                     -5534023222.9718589441
+  //   ------------------------------------------------
+  //                                -0.0010000000076058010251168827
+  //                                {{-984085445, 388118435, 542101, -2145648640}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1, 2, 3, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -984085445);
+  ck_assert_int_eq(res.bits[1], 388118435);
+  ck_assert_int_eq(res.bits[2], 542101);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_158
+  //                           5534023.2650625384464
+  // /                   -184467440822.99486211
+  //   ------------------------------------------------
+  //                                -0.0000300000002188608049365172
+  //                                {{-388644684, 140470887, 16263, -2145648640}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{3, 2, 1, -2146959360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -388644684);
+  ck_assert_int_eq(res.bits[1], 140470887);
+  ck_assert_int_eq(res.bits[2], 16263);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_159
+  //                           5534023.2650625384464
+  // /                         -553402.32229718589450
+  //   ------------------------------------------------
+  //                               -10.000000076058010249542523947
+  //                               {{2130730027, 1571379130, 542101090, -2145714176}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{10, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 2130730027);
+  ck_assert_int_eq(res.bits[1], 1571379130);
+  ck_assert_int_eq(res.bits[2], 542101090);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_160
+  //                           5534023.2650625384464
+  // /                    184467440822.99486211
+  //   ------------------------------------------------
+  //                                 0.0000300000002188608049365172
+  //                                 {{-388644684, 140470887, 16263, 1835008}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{3, 2, 1, 524288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -388644684);
+  ck_assert_int_eq(res.bits[1], 140470887);
+  ck_assert_int_eq(res.bits[2], 16263);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_161
+  //                           5534023.2650625384464
+  // /                              10
+  //   ------------------------------------------------
+  //                            553402.32650625384464
+  //                            {{16, 100, 3, 917504}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{10, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 16);
+  ck_assert_int_eq(res.bits[1], 100);
+  ck_assert_int_eq(res.bits[2], 3);
+  ck_assert_int_eq(res.bits[3], 917504);
+
+#test div_162
+  //                           5534023.2650625384464
+  // /                      -133456435
+  //   ------------------------------------------------
+  //                                -0.0414668896637508595700162379
+  //                                {{-780705973, -301387755, 22479245, -2145648640}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{133456435, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -780705973);
+  ck_assert_int_eq(res.bits[1], -301387755);
+  ck_assert_int_eq(res.bits[2], 22479245);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_163
+  //                           5534023.2650625384464
+  // /                              -0.2343453
+  //   ------------------------------------------------
+  //                         -23614825.068232810499719857834
+  //                         {{1710786218, 395816374, 1280162232, -2146107392}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{2343453, 0, 0, -2147024896}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1710786218);
+  ck_assert_int_eq(res.bits[1], 395816374);
+  ck_assert_int_eq(res.bits[2], 1280162232);
+  ck_assert_int_eq(res.bits[3], -2146107392);
+
+#test div_164
+  //                           5534023.2650625384464
+  // /                             127.2343
+  //   ------------------------------------------------
+  //                             43494.74367417071062127115094
+  //                             {{566917974, -360003393, 235785477, 1507328}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{1272343, 0, 0, 262144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 566917974);
+  ck_assert_int_eq(res.bits[1], -360003393);
+  ck_assert_int_eq(res.bits[2], 235785477);
+  ck_assert_int_eq(res.bits[3], 1507328);
+
+#test div_165
+  //                           5534023.2650625384464
+  // /                     -2147483648
+  //   ------------------------------------------------
+  //                                -0.0025769803976000000007450581
+  //                                {{-1148866603, -546469136, 1396983, -2145648640}};
+
+  es_decimal one = {{16, 100, 3, 851968}};
+  es_decimal two = {{-2147483648, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1148866603);
+  ck_assert_int_eq(res.bits[1], -546469136);
+  ck_assert_int_eq(res.bits[2], 1396983);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_166
+  //                               -63.31900243533454217608892
+  // /                          553402.32229718589441
+  //   ------------------------------------------------
+  //                                -0.0001144176666489144683724801
+  //                                {{2068250625, -251789290, 62025, -2145648640}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 2, 3, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 2068250625);
+  ck_assert_int_eq(res.bits[1], -251789290);
+  ck_assert_int_eq(res.bits[2], 62025);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_167
+  //                               -63.31900243533454217608892
+  // /                         -553402.32229718589441
+  //   ------------------------------------------------
+  //                                 0.0001144176666489144683724801
+  //                                 {{2068250625, -251789290, 62025, 1835008}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 2068250625);
+  ck_assert_int_eq(res.bits[1], -251789290);
+  ck_assert_int_eq(res.bits[2], 62025);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_168
+  //                               -63.31900243533454217608892
+  // /                             -55.340232221137244782625
+  //   ------------------------------------------------
+  //                                 1.1441766666665666772932291699
+  //                                 {{558951539, -628966959, 620259413, 1835008}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{33, 2, 3000, -2146107392}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 558951539);
+  ck_assert_int_eq(res.bits[1], -628966959);
+  ck_assert_int_eq(res.bits[2], 620259413);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_169
+  //                               -63.31900243533454217608892
+  // /                               0.055340232650625384458
+  //   ------------------------------------------------
+  //                             -1144.1766577867646871394692752
+  //                             {{1142533776, 170969392, 620259409, -2145845248}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{10, 100, 3, 1376256}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1142533776);
+  ck_assert_int_eq(res.bits[1], 170969392);
+  ck_assert_int_eq(res.bits[2], 620259409);
+  ck_assert_int_eq(res.bits[3], -2145845248);
+
+#test div_170
+  //                               -63.31900243533454217608892
+  // /                         5534023.2650625384464
+  //   ------------------------------------------------
+  //                                -0.0000114417665778676468701542
+  //                                {{-1827251866, -1743368466, 6202, -2145648640}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{16, 100, 3, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1827251866);
+  ck_assert_int_eq(res.bits[1], -1743368466);
+  ck_assert_int_eq(res.bits[2], 6202);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_171
+  //                               -63.31900243533454217608892
+  // /                             -63.31900243533454217608892
+  //   ------------------------------------------------
+  //                                 1
+  //                                 {{1, 0, 0, 0}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{32444, 100, 343253, -2145976320}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_172
+  //                               -63.31900243533454217608892
+  // /                          184467.44078004518913
+  //   ------------------------------------------------
+  //                                -0.000343252999920103466139997
+  //                                {{1504641373, -934536449, 18607, -2145714176}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 1, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1504641373);
+  ck_assert_int_eq(res.bits[1], -934536449);
+  ck_assert_int_eq(res.bits[2], 18607);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_173
+  //                               -63.31900243533454217608892
+  // /                               0.0000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{0, 0, 0, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_174
+  //                               -63.31900243533454217608892
+  // /                               0.00000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{0, 0, 0, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_175
+  //                               -63.31900243533454217608892
+  // /             1844674407800451891.3
+  //   ------------------------------------------------
+  //                                -0.000000000000000034325299992
+  //                                {{-34438376, 7, 0, -2145714176}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 1, 1, 65536}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -34438376);
+  ck_assert_int_eq(res.bits[1], 7);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_176
+  //                               -63.31900243533454217608892
+  // /                      1844674407.8004518913
+  //   ------------------------------------------------
+  //                                -0.000000034325299992010346614
+  //                                {{-1065430922, -597952902, 1, -2145714176}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 1, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1065430922);
+  ck_assert_int_eq(res.bits[1], -597952902);
+  ck_assert_int_eq(res.bits[2], 1);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_177
+  //                               -63.31900243533454217608892
+  // /            -1844674407800451893.6
+  //   ------------------------------------------------
+  //                                 0.000000000000000034325299992
+  //                                 {{-34438376, 7, 0, 1769472}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{24, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -34438376);
+  ck_assert_int_eq(res.bits[1], 7);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_178
+  //                               -63.31900243533454217608892
+  // /                      1844674413.8134061057
+  //   ------------------------------------------------
+  //                                -0.0000000343252998801226033342
+  //                                {{44656830, -1684561977, 18, -2145648640}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 15, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 44656830);
+  ck_assert_int_eq(res.bits[1], -1684561977);
+  ck_assert_int_eq(res.bits[2], 18);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_179
+  //                               -63.31900243533454217608892
+  // /            -1844674407800451891.3
+  //   ------------------------------------------------
+  //                                 0.000000000000000034325299992
+  //                                 {{-34438376, 7, 0, 1769472}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -34438376);
+  ck_assert_int_eq(res.bits[1], 7);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_180
+  //                               -63.31900243533454217608892
+  // /                               0.0000000001
+  //   ------------------------------------------------
+  //                     -633190024353.3454217608892
+  //                     {{32444, 100, 343253, -2146631680}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 0, 0, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 32444);
+  ck_assert_int_eq(res.bits[1], 100);
+  ck_assert_int_eq(res.bits[2], 343253);
+  ck_assert_int_eq(res.bits[3], -2146631680);
+
+#test div_181
+  //                               -63.31900243533454217608892
+  // /                              -0.0000000001
+  //   ------------------------------------------------
+  //                      633190024353.3454217608892
+  //                      {{32444, 100, 343253, 851968}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 0, 0, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 32444);
+  ck_assert_int_eq(res.bits[1], 100);
+  ck_assert_int_eq(res.bits[2], 343253);
+  ck_assert_int_eq(res.bits[3], 851968);
+
+#test div_182
+  //                               -63.31900243533454217608892
+  // /                          184467.44073709551617
+  //   ------------------------------------------------
+  //                                -0.0003432530000000232830475164
+  //                                {{1406081948, -755243817, 186077, -2145648640}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 0, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1406081948);
+  ck_assert_int_eq(res.bits[1], -755243817);
+  ck_assert_int_eq(res.bits[2], 186077);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_183
+  //                               -63.31900243533454217608892
+  // /                           18446.744078004518913
+  //   ------------------------------------------------
+  //                                -0.0034325299992010346613999705
+  //                                {{140281945, 1035635647, 1860778, -2145648640}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 1, 1, 983040}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 140281945);
+  ck_assert_int_eq(res.bits[1], 1035635647);
+  ck_assert_int_eq(res.bits[2], 1860778);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_184
+  //                               -63.31900243533454217608892
+  // /                          -18446.744116659224577
+  //   ------------------------------------------------
+  //                                 0.0034325299920082511564702331
+  //                                 {{-423034245, 1018888642, 1860778, 1835008}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 10, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -423034245);
+  ck_assert_int_eq(res.bits[1], 1018888642);
+  ck_assert_int_eq(res.bits[2], 1860778);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_185
+  //                               -63.31900243533454217608892
+  // /                          -18446.744078004518913
+  //   ------------------------------------------------
+  //                                 0.0034325299992010346613999705
+  //                                 {{140281945, 1035635647, 1860778, 1835008}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 1, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 140281945);
+  ck_assert_int_eq(res.bits[1], 1035635647);
+  ck_assert_int_eq(res.bits[2], 1860778);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_186
+  //                               -63.31900243533454217608892
+  // /                     -1844674407.8004518913
+  //   ------------------------------------------------
+  //                                 0.000000034325299992010346614
+  //                                 {{-1065430922, -597952902, 1, 1769472}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 1, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1065430922);
+  ck_assert_int_eq(res.bits[1], -597952902);
+  ck_assert_int_eq(res.bits[2], 1);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_187
+  //                               -63.31900243533454217608892
+  // /            -5534023222971858944.1
+  //   ------------------------------------------------
+  //                                 0.0000000000000000114417666649
+  //                                 {{-1546450343, 26, 0, 1835008}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 2, 3, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1546450343);
+  ck_assert_int_eq(res.bits[1], 26);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_188
+  //                               -63.31900243533454217608892
+  // /                     -1844674408.2299486211
+  //   ------------------------------------------------
+  //                                 0.0000000343252999840183649232
+  //                                 {{-379812912, -1684561736, 18, 1835008}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{3, 2, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -379812912);
+  ck_assert_int_eq(res.bits[1], -1684561736);
+  ck_assert_int_eq(res.bits[2], 18);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_189
+  //                               -63.31900243533454217608892
+  // /                      5534023222.9718589441
+  //   ------------------------------------------------
+  //                                -0.0000000114417666648914468372
+  //                                {{1033575956, 870135195, 6, -2145648640}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 2, 3, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1033575956);
+  ck_assert_int_eq(res.bits[1], 870135195);
+  ck_assert_int_eq(res.bits[2], 6);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_190
+  //                               -63.31900243533454217608892
+  // /                     -5534023222.9718589441
+  //   ------------------------------------------------
+  //                                 0.0000000114417666648914468372
+  //                                 {{1033575956, 870135195, 6, 1835008}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1, 2, 3, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1033575956);
+  ck_assert_int_eq(res.bits[1], 870135195);
+  ck_assert_int_eq(res.bits[2], 6);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_191
+  //                               -63.31900243533454217608892
+  // /                   -184467440822.99486211
+  //   ------------------------------------------------
+  //                                 0.0000000003432529998401836492
+  //                                 {{-476244532, 799198168, 0, 1835008}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{3, 2, 1, -2146959360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -476244532);
+  ck_assert_int_eq(res.bits[1], 799198168);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_192
+  //                               -63.31900243533454217608892
+  // /                         -553402.32229718589450
+  //   ------------------------------------------------
+  //                                 0.0001144176666489144683538723
+  //                                 {{2068064547, -251789290, 62025, 1835008}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{10, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 2068064547);
+  ck_assert_int_eq(res.bits[1], -251789290);
+  ck_assert_int_eq(res.bits[2], 62025);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_193
+  //                               -63.31900243533454217608892
+  // /                    184467440822.99486211
+  //   ------------------------------------------------
+  //                                -0.0000000003432529998401836492
+  //                                {{-476244532, 799198168, 0, -2145648640}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{3, 2, 1, 524288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -476244532);
+  ck_assert_int_eq(res.bits[1], 799198168);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_194
+  //                               -63.31900243533454217608892
+  // /                              10
+  //   ------------------------------------------------
+  //                                -6.331900243533454217608892
+  //                                {{32444, 100, 343253, -2145910784}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{10, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 32444);
+  ck_assert_int_eq(res.bits[1], 100);
+  ck_assert_int_eq(res.bits[2], 343253);
+  ck_assert_int_eq(res.bits[3], -2145910784);
+
+#test div_195
+  //                               -63.31900243533454217608892
+  // /                      -133456435
+  //   ------------------------------------------------
+  //                                 0.000000474454472242829970515
+  //                                 {{-1051734957, -1201609540, 25, 1769472}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{133456435, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1051734957);
+  ck_assert_int_eq(res.bits[1], -1201609540);
+  ck_assert_int_eq(res.bits[2], 25);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_196
+  //                               -63.31900243533454217608892
+  // /                              -0.2343453
+  //   ------------------------------------------------
+  //                               270.19531620789724469015986239
+  //                               {{87146559, 601510606, 1464731744, 1703936}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{2343453, 0, 0, -2147024896}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 87146559);
+  ck_assert_int_eq(res.bits[1], 601510606);
+  ck_assert_int_eq(res.bits[2], 1464731744);
+  ck_assert_int_eq(res.bits[3], 1703936);
+
+#test div_197
+  //                               -63.31900243533454217608892
+  // /                             127.2343
+  //   ------------------------------------------------
+  //                                -0.4976567044840466931958514331
+  //                                {{107578011, 329810755, 269780240, -2145648640}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{1272343, 0, 0, 262144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 107578011);
+  ck_assert_int_eq(res.bits[1], 329810755);
+  ck_assert_int_eq(res.bits[2], 269780240);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_198
+  //                               -63.31900243533454217608892
+  // /                     -2147483648
+  //   ------------------------------------------------
+  //                                 0.0000000294852081850797600002
+  //                                 {{20000002, -68876736, 15, 1835008}};
+
+  es_decimal one = {{32444, 100, 343253, -2145976320}};
+  es_decimal two = {{-2147483648, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 20000002);
+  ck_assert_int_eq(res.bits[1], -68876736);
+  ck_assert_int_eq(res.bits[2], 15);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_199
+  //                            184467.44078004518913
+  // /                          553402.32229718589441
+  //   ------------------------------------------------
+  //                                 0.333333333359203404858461086
+  //                                 {{-1259926626, 899770565, 18070036, 1769472}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 2, 3, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1259926626);
+  ck_assert_int_eq(res.bits[1], 899770565);
+  ck_assert_int_eq(res.bits[2], 18070036);
+  ck_assert_int_eq(res.bits[3], 1769472);
+
+#test div_200
+  //                            184467.44078004518913
+  // /                         -553402.32229718589441
+  //   ------------------------------------------------
+  //                                -0.333333333359203404858461086
+  //                                {{-1259926626, 899770565, 18070036, -2145714176}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1259926626);
+  ck_assert_int_eq(res.bits[1], 899770565);
+  ck_assert_int_eq(res.bits[2], 18070036);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_201
+  //                            184467.44078004518913
+  // /                             -55.340232221137244782625
+  //   ------------------------------------------------
+  //                             -3333.3333341089180775944824353
+  //                             {{1515202081, 986207766, 1807003621, -2145845248}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{33, 2, 3000, -2146107392}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1515202081);
+  ck_assert_int_eq(res.bits[1], 986207766);
+  ck_assert_int_eq(res.bits[2], 1807003621);
+  ck_assert_int_eq(res.bits[3], -2145845248);
+
+#test div_202
+  //                            184467.44078004518913
+  // /                               0.055340232650625384458
+  //   ------------------------------------------------
+  //                           3333333.3082393641560828056677
+  //                           {{-2094754715, 883501004, 1807003607, 1441792}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{10, 100, 3, 1376256}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -2094754715);
+  ck_assert_int_eq(res.bits[1], 883501004);
+  ck_assert_int_eq(res.bits[2], 1807003607);
+  ck_assert_int_eq(res.bits[3], 1441792);
+
+#test div_203
+  //                            184467.44078004518913
+  // /                         5534023.2650625384464
+  //   ------------------------------------------------
+  //                                 0.0333333330823936415572140495
+  //                                 {{-1044930097, 309482720, 18070036, 1835008}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{16, 100, 3, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1044930097);
+  ck_assert_int_eq(res.bits[1], 309482720);
+  ck_assert_int_eq(res.bits[2], 18070036);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_204
+  //                            184467.44078004518913
+  // /                             -63.31900243533454217608892
+  //   ------------------------------------------------
+  //                             -2913.3030162380600113657066203
+  //                             {{1627960027, -1473436924, 1579304729, -2145845248}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{32444, 100, 343253, -2145976320}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1627960027);
+  ck_assert_int_eq(res.bits[1], -1473436924);
+  ck_assert_int_eq(res.bits[2], 1579304729);
+  ck_assert_int_eq(res.bits[3], -2145845248);
+
+#test div_205
+  //                            184467.44078004518913
+  // /                          184467.44078004518913
+  //   ------------------------------------------------
+  //                                 1
+  //                                 {{1, 0, 0, 0}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 1, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_206
+  //                            184467.44078004518913
+  // /                               0.0000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{0, 0, 0, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_207
+  //                            184467.44078004518913
+  // /                               0.00000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{0, 0, 0, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_208
+  //                            184467.44078004518913
+  // /             1844674407800451891.3
+  //   ------------------------------------------------
+  //                                 0.0000000000001
+  //                                 {{1, 0, 0, 851968}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 1, 1, 65536}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 851968);
+
+#test div_209
+  //                            184467.44078004518913
+  // /                      1844674407.8004518913
+  //   ------------------------------------------------
+  //                                 0.0001
+  //                                 {{1, 0, 0, 262144}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 1, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 262144);
+
+#test div_210
+  //                            184467.44078004518913
+  // /            -1844674407800451893.6
+  //   ------------------------------------------------
+  //                                -0.0000000000001
+  //                                {{1, 0, 0, -2146631680}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{24, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2146631680);
+
+#test div_211
+  //                            184467.44078004518913
+  // /                      1844674413.8134061057
+  //   ------------------------------------------------
+  //                                 0.0000999999996740371000229948
+  //                                 {{475955260, 465778768, 54210, 1835008}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 15, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 475955260);
+  ck_assert_int_eq(res.bits[1], 465778768);
+  ck_assert_int_eq(res.bits[2], 54210);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_212
+  //                            184467.44078004518913
+  // /            -1844674407800451891.3
+  //   ------------------------------------------------
+  //                                -0.0000000000001
+  //                                {{1, 0, 0, -2146631680}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2146631680);
+
+#test div_213
+  //                            184467.44078004518913
+  // /                               0.0000000001
+  //   ------------------------------------------------
+  //                  1844674407800451.8913
+  //                  {{1, 1, 1, 262144}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 0, 0, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 1);
+  ck_assert_int_eq(res.bits[2], 1);
+  ck_assert_int_eq(res.bits[3], 262144);
+
+#test div_214
+  //                            184467.44078004518913
+  // /                              -0.0000000001
+  //   ------------------------------------------------
+  //                 -1844674407800451.8913
+  //                 {{1, 1, 1, -2147221504}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 0, 0, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 1);
+  ck_assert_int_eq(res.bits[2], 1);
+  ck_assert_int_eq(res.bits[3], -2147221504);
+
+#test div_215
+  //                            184467.44078004518913
+  // /                          184467.44073709551617
+  //   ------------------------------------------------
+  //                                 1.0000000002328306436538696289
+  //                                 {{1311048289, 1584713919, 542101086, 1835008}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 0, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1311048289);
+  ck_assert_int_eq(res.bits[1], 1584713919);
+  ck_assert_int_eq(res.bits[2], 542101086);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_216
+  //                            184467.44078004518913
+  // /                           18446.744078004518913
+  //   ------------------------------------------------
+  //                                10
+  //                                {{10, 0, 0, 0}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 1, 1, 983040}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 10);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_217
+  //                            184467.44078004518913
+  // /                          -18446.744116659224577
+  //   ------------------------------------------------
+  //                                -9.999999979045242119940831048
+  //                                {{1019311944, 458670364, 542101085, -2145714176}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 10, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1019311944);
+  ck_assert_int_eq(res.bits[1], 458670364);
+  ck_assert_int_eq(res.bits[2], 542101085);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_218
+  //                            184467.44078004518913
+  // /                          -18446.744078004518913
+  //   ------------------------------------------------
+  //                               -10
+  //                               {{10, 0, 0, -2147483648}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 1, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 10);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test div_219
+  //                            184467.44078004518913
+  // /                     -1844674407.8004518913
+  //   ------------------------------------------------
+  //                                -0.0001
+  //                                {{1, 0, 0, -2147221504}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 1, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147221504);
+
+#test div_220
+  //                            184467.44078004518913
+  // /            -5534023222971858944.1
+  //   ------------------------------------------------
+  //                                -0.0000000000000333333333359203
+  //                                {{921516643, 77610, 0, -2145648640}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 2, 3, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 921516643);
+  ck_assert_int_eq(res.bits[1], 77610);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_221
+  //                            184467.44078004518913
+  // /                     -1844674408.2299486211
+  //   ------------------------------------------------
+  //                                -0.000099999999976716935634613
+  //                                {{-206037323, 46648349, 5421, -2145714176}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{3, 2, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -206037323);
+  ck_assert_int_eq(res.bits[1], 46648349);
+  ck_assert_int_eq(res.bits[2], 5421);
+  ck_assert_int_eq(res.bits[3], -2145714176);
+
+#test div_222
+  //                            184467.44078004518913
+  // /                      5534023222.9718589441
+  //   ------------------------------------------------
+  //                                 0.0000333333333359203404858461
+  //                                 {{952222813, 155518593, 18070, 1835008}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 2, 3, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 952222813);
+  ck_assert_int_eq(res.bits[1], 155518593);
+  ck_assert_int_eq(res.bits[2], 18070);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_223
+  //                            184467.44078004518913
+  // /                     -5534023222.9718589441
+  //   ------------------------------------------------
+  //                                -0.0000333333333359203404858461
+  //                                {{952222813, 155518593, 18070, -2145648640}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1, 2, 3, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 952222813);
+  ck_assert_int_eq(res.bits[1], 155518593);
+  ck_assert_int_eq(res.bits[2], 18070);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_224
+  //                            184467.44078004518913
+  // /                   -184467440822.99486211
+  //   ------------------------------------------------
+  //                                -0.0000009999999997671693563461
+  //                                {{-1738590651, 434161564, 542, -2145648640}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{3, 2, 1, -2146959360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1738590651);
+  ck_assert_int_eq(res.bits[1], 434161564);
+  ck_assert_int_eq(res.bits[2], 542);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_225
+  //                            184467.44078004518913
+  // /                         -553402.32229718589450
+  //   ------------------------------------------------
+  //                                -0.3333333333592034048042509773
+  //                                {{-256465459, 407771064, 180700362, -2145648640}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{10, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -256465459);
+  ck_assert_int_eq(res.bits[1], 407771064);
+  ck_assert_int_eq(res.bits[2], 180700362);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_226
+  //                            184467.44078004518913
+  // /                    184467440822.99486211
+  //   ------------------------------------------------
+  //                                 0.0000009999999997671693563461
+  //                                 {{-1738590651, 434161564, 542, 1835008}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{3, 2, 1, 524288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], -1738590651);
+  ck_assert_int_eq(res.bits[1], 434161564);
+  ck_assert_int_eq(res.bits[2], 542);
+  ck_assert_int_eq(res.bits[3], 1835008);
+
+#test div_227
+  //                            184467.44078004518913
+  // /                              10
+  //   ------------------------------------------------
+  //                             18446.744078004518913
+  //                             {{1, 1, 1, 983040}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{10, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1);
+  ck_assert_int_eq(res.bits[1], 1);
+  ck_assert_int_eq(res.bits[2], 1);
+  ck_assert_int_eq(res.bits[3], 983040);
+
+#test div_228
+  //                            184467.44078004518913
+  // /                      -133456435
+  //   ------------------------------------------------
+  //                                -0.0013822296450526734745312206
+  //                                {{816815054, 824719569, 749308, -2145648640}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{133456435, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 816815054);
+  ck_assert_int_eq(res.bits[1], 824719569);
+  ck_assert_int_eq(res.bits[2], 749308);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_229
+  //                            184467.44078004518913
+  // /                              -0.2343453
+  //   ------------------------------------------------
+  //                           -787160.82968186342602134542489
+  //                           {{1008752793, 785301883, -27759888, -2145976320}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{2343453, 0, 0, -2147024896}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 1008752793);
+  ck_assert_int_eq(res.bits[1], 785301883);
+  ck_assert_int_eq(res.bits[2], -27759888);
+  ck_assert_int_eq(res.bits[3], -2145976320);
+
+#test div_230
+  //                            184467.44078004518913
+  // /                             127.2343
+  //   ------------------------------------------------
+  //                              1449.8247782244661158979929154
+  //                              {{556631106, 589013586, 785951587, 1638400}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{1272343, 0, 0, 262144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 556631106);
+  ck_assert_int_eq(res.bits[1], 589013586);
+  ck_assert_int_eq(res.bits[2], 785951587);
+  ck_assert_int_eq(res.bits[3], 1638400);
+
+#test div_231
+  //                            184467.44078004518913
+  // /                     -2147483648
+  //   ------------------------------------------------
+  //                                -0.0000858993459400000000046566
+  //                                {{552941030, 552941030, 46566, -2145648640}};
+
+  es_decimal one = {{1, 1, 1, 917504}};
+  es_decimal two = {{-2147483648, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 552941030);
+  ck_assert_int_eq(res.bits[1], 552941030);
+  ck_assert_int_eq(res.bits[2], 46566);
+  ck_assert_int_eq(res.bits[3], -2145648640);
+
+#test div_232
+  //                                 0.0000000000000
+  // /                          553402.32229718589441
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 2, 3, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_233
+  //                                 0.0000000000000
+  // /                         -553402.32229718589441
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, -2147483648}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test div_234
+  //                                 0.0000000000000
+  // /                             -55.340232221137244782625
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, -2147483648}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{33, 2, 3000, -2146107392}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test div_235
+  //                                 0.0000000000000
+  // /                               0.055340232650625384458
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{10, 100, 3, 1376256}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_236
+  //                                 0.0000000000000
+  // /                         5534023.2650625384464
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{16, 100, 3, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_237
+  //                                 0.0000000000000
+  // /                             -63.31900243533454217608892
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, -2147483648}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{32444, 100, 343253, -2145976320}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test div_238
+  //                                 0.0000000000000
+  // /                          184467.44078004518913
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 1, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_239
+  //                                 0.0000000000000
+  // /                               0.0000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{0, 0, 0, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_240
+  //                                 0.0000000000000
+  // /                               0.00000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{0, 0, 0, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_241
+  //                                 0.0000000000000
+  // /             1844674407800451891.3
+  //   ------------------------------------------------
+  //                                 0.000000000000
+  //                                 {{0, 0, 0, 786432}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 1, 1, 65536}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 786432);
+
+#test div_242
+  //                                 0.0000000000000
+  // /                      1844674407.8004518913
+  //   ------------------------------------------------
+  //                                 0.000
+  //                                 {{0, 0, 0, 196608}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 1, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 196608);
+
+#test div_243
+  //                                 0.0000000000000
+  // /            -1844674407800451893.6
+  //   ------------------------------------------------
+  //                                 0.000000000000
+  //                                 {{0, 0, 0, -2146697216}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{24, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2146697216);
+
+#test div_244
+  //                                 0.0000000000000
+  // /                      1844674413.8134061057
+  //   ------------------------------------------------
+  //                                 0.000
+  //                                 {{0, 0, 0, 196608}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 15, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 196608);
+
+#test div_245
+  //                                 0.0000000000000
+  // /            -1844674407800451891.3
+  //   ------------------------------------------------
+  //                                 0.000000000000
+  //                                 {{0, 0, 0, -2146697216}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2146697216);
+
+#test div_246
+  //                                 0.0000000000000
+  // /                               0.0000000001
+  //   ------------------------------------------------
+  //                                 0.000
+  //                                 {{0, 0, 0, 196608}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 0, 0, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 196608);
+
+#test div_247
+  //                                 0.0000000000000
+  // /                              -0.0000000001
+  //   ------------------------------------------------
+  //                                 0.000
+  //                                 {{0, 0, 0, -2147287040}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 0, 0, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147287040);
+
+#test div_248
+  //                                 0.0000000000000
+  // /                          184467.44073709551617
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 0, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_249
+  //                                 0.0000000000000
+  // /                           18446.744078004518913
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 1, 1, 983040}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_250
+  //                                 0.0000000000000
+  // /                          -18446.744116659224577
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, -2147483648}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 10, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test div_251
+  //                                 0.0000000000000
+  // /                          -18446.744078004518913
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, -2147483648}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 1, 1, -2146500608}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test div_252
+  //                                 0.0000000000000
+  // /                     -1844674407.8004518913
+  //   ------------------------------------------------
+  //                                 0.000
+  //                                 {{0, 0, 0, -2147287040}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 1, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147287040);
+
+#test div_253
+  //                                 0.0000000000000
+  // /            -5534023222971858944.1
+  //   ------------------------------------------------
+  //                                 0.000000000000
+  //                                 {{0, 0, 0, -2146697216}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 2, 3, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2146697216);
+
+#test div_254
+  //                                 0.0000000000000
+  // /                     -1844674408.2299486211
+  //   ------------------------------------------------
+  //                                 0.000
+  //                                 {{0, 0, 0, -2147287040}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{3, 2, 1, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147287040);
+
+#test div_255
+  //                                 0.0000000000000
+  // /                      5534023222.9718589441
+  //   ------------------------------------------------
+  //                                 0.000
+  //                                 {{0, 0, 0, 196608}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 2, 3, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 196608);
+
+#test div_256
+  //                                 0.0000000000000
+  // /                     -5534023222.9718589441
+  //   ------------------------------------------------
+  //                                 0.000
+  //                                 {{0, 0, 0, -2147287040}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1, 2, 3, -2146828288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147287040);
+
+#test div_257
+  //                                 0.0000000000000
+  // /                   -184467440822.99486211
+  //   ------------------------------------------------
+  //                                 0.00000
+  //                                 {{0, 0, 0, -2147155968}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{3, 2, 1, -2146959360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147155968);
+
+#test div_258
+  //                                 0.0000000000000
+  // /                         -553402.32229718589450
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, -2147483648}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{10, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test div_259
+  //                                 0.0000000000000
+  // /                    184467440822.99486211
+  //   ------------------------------------------------
+  //                                 0.00000
+  //                                 {{0, 0, 0, 327680}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{3, 2, 1, 524288}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 327680);
+
+#test div_260
+  //                                 0.0000000000000
+  // /                              10
+  //   ------------------------------------------------
+  //                                 0.0000000000000
+  //                                 {{0, 0, 0, 851968}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{10, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 851968);
+
+#test div_261
+  //                                 0.0000000000000
+  // /                      -133456435
+  //   ------------------------------------------------
+  //                                 0.0000000000000
+  //                                 {{0, 0, 0, -2146631680}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{133456435, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2146631680);
+
+#test div_262
+  //                                 0.0000000000000
+  // /                              -0.2343453
+  //   ------------------------------------------------
+  //                                 0.000000
+  //                                 {{0, 0, 0, -2147090432}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{2343453, 0, 0, -2147024896}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147090432);
+
+#test div_263
+  //                                 0.0000000000000
+  // /                             127.2343
+  //   ------------------------------------------------
+  //                                 0.000000000
+  //                                 {{0, 0, 0, 589824}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{1272343, 0, 0, 262144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 589824);
+
+#test div_264
+  //                                 0.0000000000000
+  // /                     -2147483648
+  //   ------------------------------------------------
+  //                                 0.0000000000000
+  //                                 {{0, 0, 0, -2146631680}};
+
+  es_decimal one = {{0, 0, 0, 851968}};
+  es_decimal two = {{-2147483648, 0, 0, -2147483648}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2146631680);
+
+#test div_265
+  //                                 0.00000000000000
+  // /                          553402.32229718589441
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{1, 2, 3, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_266
+  //                                 0.00000000000000
+  // /                         -553402.32229718589441
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, -2147483648}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{1, 2, 3, -2146566144}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test div_267
+  //                                 0.00000000000000
+  // /                             -55.340232221137244782625
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, -2147483648}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{33, 2, 3000, -2146107392}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test div_268
+  //                                 0.00000000000000
+  // /                               0.055340232650625384458
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{10, 100, 3, 1376256}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_269
+  //                                 0.00000000000000
+  // /                         5534023.2650625384464
+  //   ------------------------------------------------
+  //                                 0.0
+  //                                 {{0, 0, 0, 65536}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{16, 100, 3, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 65536);
+
+#test div_270
+  //                                 0.00000000000000
+  // /                             -63.31900243533454217608892
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, -2147483648}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{32444, 100, 343253, -2145976320}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2147483648);
+
+#test div_271
+  //                                 0.00000000000000
+  // /                          184467.44078004518913
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{1, 1, 1, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_272
+  //                                 0.00000000000000
+  // /                               0.0000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{0, 0, 0, 851968}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_273
+  //                                 0.00000000000000
+  // /                               0.00000000000000
+  //   ------------------------------------------------
+  //                                 0
+  //                                 {{0, 0, 0, 0}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{0, 0, 0, 917504}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 3);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 0);
+
+#test div_274
+  //                                 0.00000000000000
+  // /             1844674407800451891.3
+  //   ------------------------------------------------
+  //                                 0.0000000000000
+  //                                 {{0, 0, 0, 851968}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{1, 1, 1, 65536}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 851968);
+
+#test div_275
+  //                                 0.00000000000000
+  // /                      1844674407.8004518913
+  //   ------------------------------------------------
+  //                                 0.0000
+  //                                 {{0, 0, 0, 262144}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{1, 1, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 262144);
+
+#test div_276
+  //                                 0.00000000000000
+  // /            -1844674407800451893.6
+  //   ------------------------------------------------
+  //                                 0.0000000000000
+  //                                 {{0, 0, 0, -2146631680}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{24, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2146631680);
+
+#test div_277
+  //                                 0.00000000000000
+  // /                      1844674413.8134061057
+  //   ------------------------------------------------
+  //                                 0.0000
+  //                                 {{0, 0, 0, 262144}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{1, 15, 1, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 262144);
+
+#test div_278
+  //                                 0.00000000000000
+  // /            -1844674407800451891.3
+  //   ------------------------------------------------
+  //                                 0.0000000000000
+  //                                 {{0, 0, 0, -2146631680}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{1, 1, 1, -2147418112}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], -2146631680);
+
+#test div_279
+  //                                 0.00000000000000
+  // /                               0.0000000001
+  //   ------------------------------------------------
+  //                                 0.0000
+  //                                 {{0, 0, 0, 262144}};
+
+  es_decimal one = {{0, 0, 0, 917504}};
+  es_decimal two = {{1, 0, 0, 655360}};
+  es_decimal res = {{0, 0, 0, 0}};
+  ck_assert_int_eq(es_div(one, two, &res), 0);
+  ck_assert_int_eq(res.bits[0], 0);
+  ck_assert_int_eq(res.bits[1], 0);
+  ck_assert_int_eq(res.bits[2], 0);
+  ck_assert_int_eq(res.bits[3], 262144);

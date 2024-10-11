@@ -1,0 +1,80 @@
+#suite div_big_to_ten_test
+
+#test div_big_to_ten_1
+  BIG_decimal test = {{(int)0b00000000000000000000000000001011, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000}};
+  int returned = div_big_to_ten(&test, NULL);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(test.bits[0], (int)0b00000000000000000000000000000001);
+  ck_assert_int_eq(test.bits[1], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[2], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[3], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[4], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[5], (int)0b00000000000000000000000000000000);
+
+#test div_big_to_ten_2
+  BIG_decimal test = {{(int)0b00000000000000000000000000001010, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000}};
+  int returned = div_big_to_ten(&test, NULL);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(test.bits[0], (int)0b00000000000000000000000000000001);
+  ck_assert_int_eq(test.bits[1], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[2], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[3], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[4], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[5], (int)0b00000000000000000000000000000000);
+
+#test div_big_to_ten_3
+  BIG_decimal test = {{(int)0b00000000000000000000000000000010, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000}};
+  int returned = div_big_to_ten(&test, NULL);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(test.bits[0], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[1], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[2], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[3], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[4], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[5], (int)0b00000000000000000000000000000000);
+
+#test div_big_to_ten_4
+  BIG_decimal test = {{(int)0b00000000000000000000000000010100, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000, (int)0b00000000000000000000000000000000}};
+  int returned = div_big_to_ten(&test, NULL);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(test.bits[0], (int)0b00000000000000000000000000000010);
+  ck_assert_int_eq(test.bits[1], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[2], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[3], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[4], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[5], (int)0b00000000000000000000000000000000);
+
+#test div_big_to_ten_5
+  BIG_decimal test = {{0, 2, 3, 0, 0, 0}}; // 55340232229718589440
+  int returned = div_big_to_ten(&test, NULL);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(test.bits[0], 0);
+  ck_assert_int_eq(test.bits[1], (int)0b01001100110011001100110011001101);
+  ck_assert_int_eq(test.bits[2], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[3], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[4], (int)0b00000000000000000000000000000000);
+  ck_assert_int_eq(test.bits[5], (int)0b00000000000000000000000000000000);
+
+#test div_big_to_ten_6
+  BIG_decimal test = {{-1, -1, -1, -1, -1, -1}};
+  int returned = div_big_to_ten(&test, NULL);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(test.bits[0], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(test.bits[1], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(test.bits[2], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(test.bits[3], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(test.bits[4], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(test.bits[5], (int)0b00011001100110011001100110011001);
+
+#test div_big_to_ten_7
+  BIG_decimal test = {{-1, -1, -1, -1, -1, -1}};
+  int test2 = 0;
+  int returned = div_big_to_ten(&test, &test2);
+  ck_assert_int_eq(returned, 0);
+  ck_assert_int_eq(test.bits[0], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(test.bits[1], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(test.bits[2], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(test.bits[3], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(test.bits[4], (int)0b10011001100110011001100110011001);
+  ck_assert_int_eq(test.bits[5], (int)0b00011001100110011001100110011001);
+  ck_assert_int_eq(test2, 5);
