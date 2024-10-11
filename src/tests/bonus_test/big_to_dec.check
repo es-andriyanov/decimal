@@ -4,7 +4,7 @@
   BIG_decimal test = {{1, 2, 3, 0, 0, 0}};
   unsigned int scale = 1;
   int sign = 1;
-  s21_decimal res = {{0, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
 
   int returned = big_to_dec(test, &res, scale, sign, 0);
 
@@ -18,7 +18,7 @@
   BIG_decimal test = {{1, 2, 3, 0, 0, 0}};
   unsigned int scale = 0;
   int sign = 1;
-  s21_decimal res = {{0, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
 
   int returned = big_to_dec(test, &res, scale, sign, 0);
 
@@ -32,7 +32,7 @@
   BIG_decimal test = {{1, 2, 3, 0, 0, 0}};
   unsigned int scale = 3;
   int sign = 1;
-  s21_decimal res = {{0, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
 
   int returned = big_to_dec(test, &res, scale, sign, 0);
 
@@ -46,7 +46,7 @@
 //   BIG_decimal test = {{1, 2, 3, 0, 0, 0}};
 //   unsigned int scale = -1;
 //   int sign = 1;
-//   s21_decimal res = {{0, 0, 0, 0}};
+//   es_decimal res = {{0, 0, 0, 0}};
 
 //   int returned = big_to_dec(test, &res, scale, sign, 0);
 
@@ -56,7 +56,7 @@
   BIG_decimal test = {{1, 2, 3, 0, 0, 0}};
   unsigned int scale = 29;
   int sign = 1;
-  s21_decimal res = {{0, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
   BIG_decimal div_ten = test;
   div_big_to_ten(&div_ten, NULL);
 
@@ -73,7 +73,7 @@
   BIG_decimal test = {{1, 2, 3, 0, 0, 0}};
   unsigned int scale = 28;
   int sign = 1;
-  s21_decimal res = {{0, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
 
   int returned = big_to_dec(test, &res, scale, sign, 0);
 
@@ -87,7 +87,7 @@
   BIG_decimal test = {{-7, -1, -1, 9, 0, 0}};
   unsigned int scale = 1;
   int sign = 1;
-  s21_decimal res = {{0, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
 
   int returned = big_to_dec(test, &res, scale, sign, 0);
 
@@ -100,7 +100,7 @@
   BIG_decimal test = {{-5, -1, -1, 9, 0, 0}};
   unsigned int scale = 1;
   int sign = 1;
-  s21_decimal res = {{0, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
 
   int returned = big_to_dec(test, &res, scale, sign, 0);
 
@@ -110,7 +110,7 @@
   BIG_decimal test = {{-2, -1, -1, 9, 0, 0}};
   unsigned int scale = 1;
   int sign = 1;
-  s21_decimal res = {{0, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
 
   int returned = big_to_dec(test, &res, scale, sign, 0);
 
@@ -120,7 +120,7 @@
   BIG_decimal test = {{-17, -1, -1, 9, 0, 0}};
   unsigned int scale = 1;
   int sign = 1;
-  s21_decimal res = {{0, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
 
   int returned = big_to_dec(test, &res, scale, sign, 0);
 
@@ -133,7 +133,7 @@
   BIG_decimal test = {{-12, -1, -1, 9, 0, 0}};
   unsigned int scale = 1;
   int sign = 1;
-  s21_decimal res = {{0, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
 
   int returned = big_to_dec(test, &res, scale, sign, 0);
 
@@ -146,7 +146,7 @@
   BIG_decimal test = {{10, 10, 10, 0, 0, 0}};
   unsigned int scale = 29;
   int sign = 1;
-  s21_decimal res = {{0, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
 
   int returned = big_to_dec(test, &res, scale, sign, 0);
 
@@ -159,7 +159,7 @@
   BIG_decimal test = {{100, 100, 100, 0, 0, 0}};
   unsigned int scale = 30;
   int sign = 1;
-  s21_decimal res = {{0, 0, 0, 0}};
+  es_decimal res = {{0, 0, 0, 0}};
 
   int returned = big_to_dec(test, &res, scale, sign, 0);
 
